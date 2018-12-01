@@ -1,8 +1,8 @@
-#from tabulate import tabulate
 #from prettytable import PrettyTable
 #from texttabele import Texttable
 #terminaltables
 #asciitable
+from tabulate import tabulate
 
 class Actor:
     def __init__(self, pc_type, name, level, max_hp, max_str, max_dex, max_sta):
@@ -12,8 +12,8 @@ class Actor:
         self.status = "normal"
         self.max_crit_hit_chance = 10
         self.cur_crit_hit_chance = 10
-        self.max_crit_fail_chance = 0
-        self.cur_crit_fail_chance = 0
+        self.max_crit_fail_chance = 1
+        self.cur_crit_fail_chance = 1
         self.set_stats(max_hp, max_str, max_dex, max_sta)
     
     def set_stats(self, max_hp, max_str, max_dex, max_sta):
@@ -32,7 +32,33 @@ class Actor:
         return stats
 
     def print_char_sheet(self):
-        raise "not implemented"
+        actor = {"name": self.name,
+                "pc_type": self.pc_type,
+                "level": self.level
+        }
+
+        #stats = get_stat_list()
+        #for stat in stats:
+        #    actor.append({"max_".format(
+
+        #actor.append({"max_".format(): 4})
+
+        print(
+            tabulate(
+                {
+                    "name": [self.name],
+                    "level": [self.level],
+                    "hp": [str("{}/{}".format(self.cur_hp, self.max_hp))],
+                    "str": [str("{}/{}".format(self.cur_str, self.max_str))],
+                    "dex": [str("{}/{}".format(self.cur_dex, self.max_dex))],
+                    "sta": [str("{}/{}".format(self.cur_sta, self.max_sta))],
+                    "crit_hit": [str("{}/{}".format(self.cur_crit_hit_chance, self.max_crit_hit_chance))],
+                    "crit_fail": [str("{}/{}".format(self.cur_crit_fail_chance, self.max_crit_fail_chance))],
+                },
+                headers="keys",
+                tablefmt="grid"
+            )
+        )
 
     def print_name(self):
         print(self.name)

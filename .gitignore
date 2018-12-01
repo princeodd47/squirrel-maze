@@ -1,5 +1,9 @@
-# python cache files
+# python files
 __pycache__
+*.egg-info
+
+# tox files
+.tox
 
 # swap files
-.swp
+*.swp

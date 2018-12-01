@@ -2,11 +2,13 @@ import random
 import resources.helpers as helpers
 
 def fight(source, target):
+    # TODO: add function to calculate damage
+    # to be used with all other physical attacks
+    # TODO: dmg should be a list of dictionaries
     atk_rand = helpers.get_rand_val(1, 10)
     if helpers.is_critical_hit(atk_rand, source.cur_crit_hit_chance):
         atk_rand += helpers.get_crit_hit_bonus()
     elif helpers.is_critical_fail(atk_rand, source.cur_crit_fail_chance):
-        # TODO: why is his not being called
         atk_rand += helpers.get_crit_fail_bonus()
 
     src_atk_base = source.cur_str + source.cur_dex
@@ -36,3 +38,24 @@ def fight_all(source, targets):
     for target in targets:
         fight(source, target)
 
+def fire_bolt(source, target):
+    raise "not implemented"
+    # TODO: calculate magic defense
+    dmg = []
+    dmg.append(
+        {"element": "fire", "damage": get_rand_val(1, 2) + source.level}
+    )
+    return dmg
+
+def fire_punch(source, target):
+    raise "not implemented"
+    # TODO: calculate magic defense
+    # TODO: calculate normal attack
+    dmg = []
+    dmg.append(
+        {"element": "fire", "damage": get_rand_val(1, 2) + source.level}
+    )
+    dmg.append(
+        {"element": "none", "damage": get_rand_val(1, 10)}
+    )
+    return dmg
