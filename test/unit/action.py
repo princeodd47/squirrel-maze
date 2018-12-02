@@ -1,29 +1,30 @@
-import unittest
+import mock
+import pytest
 import resources.action as action
 
-class TestAction(unittest.TestCase):
+#import unittest
+#class TestAction(unittest.TestCase):
+
+class TestAction(object):
 
     def test_is_critical_hit():
         #self.assertTrue(action.is_critical_hit(10, 10))
-        pass
+        assert False
 
     def test_is_critical_hit():
         #self.assertFalse(action.is_critical_hit(1, 5))
-        pass
+        assert True
 
     def test_is_critical_fail():
         #self.assertTrue(action.is_critical_fail(1, 1))
-        pass
+        assert True
 
     def test_is_critical_fail():
         #self.assertFalse(action.is_critical_fail(5, 1))
-        pass
+        assert True
 
     def test_get_crit_hit_bonus():
-        pass
+        assert True
 
     def test_get_crit_fail_bonus():
-        pass
-
-if __name__ == '__main__':
-    unittest.main()
+        assert True
