@@ -4,8 +4,10 @@
 #asciitable
 from tabulate import tabulate
 
+from squirrel_maze.resources import helpers
+
 class Actor:
-    def __init__(self, pc_type, name, level, max_hp, max_str, max_dex, max_sta):
+    def __init__(self, pc_type="npc", name="unknown", level=0, max_hp=0, max_str=0, max_dex=0, max_sta=0):
         self.pc_type = pc_type
         self.name = name
         self.level = level
@@ -25,11 +27,6 @@ class Actor:
         self.cur_str = max_str
         self.cur_dex = max_dex
         self.cur_sta = max_sta
-
-    def get_stat_list(self):
-        stats = ["hp", "str", "dex", "sta",
-                "crit_hit_chance", "crit_fail_chance"]
-        return stats
 
     def print_char_sheet(self):
         actor = {"name": self.name,
@@ -84,7 +81,7 @@ class Actor:
     def restore_all_stats_to_max(self):
         #stats = ["hp", "str", "agi", "sta",
         #        "crit_hit_chance", "crit_fail_chance"]
-        stats = self.get_stat_list()
+        stats = helpers.get_stat_list()
         for stat in stats:
             self.restore_stat_to_max(stat)
 

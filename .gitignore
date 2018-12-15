@@ -4,6 +4,10 @@ __pycache__
 
 # tox files
 .tox
+.coverage
 
 # swap files
 *.swp
+
+# temp files
+dist/*

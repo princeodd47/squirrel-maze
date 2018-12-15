@@ -70,4 +70,7 @@ gob2 = npc.get_goblin("gob2")
 #print("max_str = {} ".format(foo.max_str), end="")
 #print("")
 
+action.fight(foo, gob1)
+action.fight(gob1, foo)
 foo.print_char_sheet()
+gob1.print_char_sheet()

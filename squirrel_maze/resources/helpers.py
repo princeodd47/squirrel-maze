@@ -19,9 +19,13 @@ def get_crit_hit_bonus():
     # TODO: add recursive addition on 10s
     # should that be an advantage?
     return int(get_rand_val(1, 10) / 2)
-    
 
 def get_crit_fail_bonus():
     #value = random.randint(1, 10) * -1
     value = int(get_rand_val(1, 10) / 2) * -1
     return value
+
+def get_stat_list():
+    stats = ["hp", "str", "dex", "sta",
+            "crit_hit_chance", "crit_fail_chance"]
+    return stats

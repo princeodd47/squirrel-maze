@@ -1,5 +1,5 @@
 import random
-import resources.helpers as helpers
+from squirrel_maze.resources import helpers
 
 def fight(source, target):
     # TODO: add function to calculate damage

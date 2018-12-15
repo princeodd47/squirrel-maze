@@ -1,4 +1,7 @@
+import os
 import setuptools
+
+setup_dir = os.path.dirname(os.path.abspath(__file__))
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -18,4 +21,5 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    include_package_data=True,
 )
