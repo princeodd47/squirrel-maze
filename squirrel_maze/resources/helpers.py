@@ -26,6 +26,10 @@ def get_crit_fail_bonus():
     return value
 
 def get_stat_list():
-    stats = ["hp", "str", "dex", "sta",
+    stats = ["hp", "str", "dex", "sta", "wil",
             "crit_hit_chance", "crit_fail_chance"]
     return stats
+
+def calc_magic_defense(source, target):
+    return source.cur_wil - target.cur_wil
+

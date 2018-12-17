@@ -1,35 +1,55 @@
 import pytest
 import unittest
 
+from unittest.mock import patch
+
 from squirrel_maze.resources import helpers
+from squirrel_maze.resources import actor
 
 class TestHelper(unittest.TestCase):
 
-    def test_is_critical_hit(self):
-        self.assertTrue(helpers.is_critical_hit(10, 10))
+    @patch('squirrel_maze.resources.helpers.random.randint', return_value = 6, autospec=True)
+    def test_get_rand_val(self, mock_rand):
+        test_rand_num = helpers.get_rand_val(1, 10)
+        assert test_rand_num == 6
+        mock_rand.assert_called_with(1, 10)
+
+    def test_is_critical_hit_true(self):
+        assert helpers.is_critical_hit(10, 10) is True
 
     def test_is_critical_hit_false(self):
-        self.assertFalse(helpers.is_critical_hit(1, 10))
-        self.assertFalse(helpers.is_critical_hit(5, 10))
-        self.assertFalse(helpers.is_critical_hit(9, 10))
+        assert helpers.is_critical_hit(1, 10) is False
+        assert helpers.is_critical_hit(5, 10) is False
+        assert helpers.is_critical_hit(9, 10) is False
 
-    def test_is_critical_fail(self):
-        self.assertTrue(helpers.is_critical_fail(1, 1))
+    def test_is_critical_fail_true(self):
+        assert helpers.is_critical_fail(1, 1) is True
 
     def test_is_critical_fail_false(self):
-        self.assertFalse(helpers.is_critical_fail(10, 1))
-        self.assertFalse(helpers.is_critical_fail(4, 1))
-        self.assertFalse(helpers.is_critical_fail(2, 1))
+        assert helpers.is_critical_fail(10, 1) is False
+        assert helpers.is_critical_fail(4, 1) is False
+        assert helpers.is_critical_fail(2, 1) is False
 
-    def test_get_crit_hit_bonus(self):
+    @patch('squirrel_maze.resources.helpers.random.randint', return_value = 6, autospec=True)
+    def test_get_crit_hit_bonus(self, mock_rand):
         value = helpers.get_crit_hit_bonus() 
-        self.assertTrue(value > 0)
+        assert value == 3
+        mock_rand.assert_called_with(1, 10)
 
-    def test_get_crit_fail_bonus(self):
+    @patch('squirrel_maze.resources.helpers.random.randint', return_value = 6, autospec=True)
+    def test_get_crit_fail_bonus(self, mock_rand):
         value = helpers.get_crit_fail_bonus() 
-        self.assertTrue(value < 0)
+        assert value == -3
+        mock_rand.assert_called_with(1, 10)
 
     def test_get_stat_list(self):
-        test_stats = ["hp", "str", "dex", "sta",
+        test_stats = ["hp", "str", "dex", "sta", "wil",
                      "crit_hit_chance", "crit_fail_chance"]
-        self.assertTrue(test_stats == helpers.get_stat_list())
+        assert test_stats == helpers.get_stat_list()
+
+    def test_calc_magic_defense(self):
+        source_actor = actor.Actor(level=10, max_wil=5)
+        target_actor = actor.Actor(level=10, max_wil=8)
+        md = helpers.calc_magic_defense(source_actor, target_actor)
+        assert md == -3
+
