@@ -5,6 +5,7 @@ import sys
 from PyInquirer import style_from_dict, Token, prompt, Separator, print_json
 from pprint import pprint
 
+from squirrel_maze.resources import actor
 from squirrel_maze.resources import combat
 from squirrel_maze.resources import npc
 
@@ -84,9 +85,9 @@ def combat_menu():
         if answers['selection'] == 'Fight a Goblin':
             actors = []
             actors.append(actor.Actor(name='ham',pc_type='pc',level=1,max_hp=10,max_str=10,max_dex=10,max_sta=10))
-            actors.append(npc.get_goblin())
-            battle = combat.Combat(actors)
-            battle.
+            actors.append(npc.get_big_goblin())
+            cur_battle = combat.Combat(actors)
+            cur_battle.battle()
 
 def battle_menu(active_actor, actors):
     # TODO: write actor method to get a list of actions per actor

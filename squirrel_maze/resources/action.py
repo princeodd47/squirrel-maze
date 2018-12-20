@@ -16,9 +16,10 @@ def fight(source, target):
     #target.cur_sta_modify(-1)
 
     # TODO: add helper.print_atk_result()
-    #print("{}({} + {} = {}) attacks {}({}) for {} dmg.".format(
-    #    source.name, src_atk_base, atk_rand, src_atk_total,
-    #    target.name, target_def, dmg))
+    print("{}({}) attacks {}({}) for {} dmg.".format(
+        source.name, src_atk_total, target.name,
+        tar_def_total, dmg)
+    )
 
 def fight_all(source, targets):
     for target in targets:
