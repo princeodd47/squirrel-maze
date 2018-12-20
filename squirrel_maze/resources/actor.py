@@ -97,5 +97,18 @@ class Actor:
         def_total = self.cur_sta + self.cur_dex + def_rand
         if def_total < 0:
             def_total = 0
-
         return def_total
+
+    def get_friendly_actors(self, actors):
+        friendlies = []
+        for actor in actors:
+            if self.pc_type == actor.pc_type:
+                friendlies.append(actor)
+        return friendlies
+
+    def get_unfriendly_actors(self, actors):
+        friendlies = []
+        for actor in actors:
+            if self.pc_type != actor.pc_type:
+                friendlies.append(actor)
+        return friendlies

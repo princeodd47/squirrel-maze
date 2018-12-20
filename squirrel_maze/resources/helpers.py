@@ -41,14 +41,12 @@ def any_members_active(actors, pc_type):
             return True
     return False
 
-# TODO: how to pass in stat to make this dynamic?
 def get_actor_list_by_stat(actors, stat):
     #sorted_actors = sorted(actors, key=lambda actor: actor.cur_dex, reverse=True)
     sorted_actors = sorted(actors, key=lambda actor: getattr(actor, stat), reverse=True)
     #sorted_actors = break_tie_between(sorted_actors)
     return sorted_actors
 
-# TODO: how to pass in stat to make this dynamic?
 def get_max_stat_from_actor_list(actors, stat):
     #max_val = max(actor.cur_dex for actor in actors)
     max_val = max(getattr(actor, stat) for actor in actors)
@@ -56,7 +54,6 @@ def get_max_stat_from_actor_list(actors, stat):
     # prevent a loop
     return max_val
 
-# TODO: how to pass in stat to make this dynamic?
 def break_tie_between_actors(actors, stat):
     max_val = get_max_stat_from_actor_list(actors, stat)
     max_actors = []
@@ -73,4 +70,3 @@ def break_tie_between_actors(actors, stat):
         actors[i] = actor
         i += 1
     return actors
-
