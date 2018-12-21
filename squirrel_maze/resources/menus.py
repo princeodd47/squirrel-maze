@@ -2,6 +2,7 @@ from __future__ import print_function, unicode_literals
 
 import sys
 
+from art import tprint
 from PyInquirer import style_from_dict, Token, prompt, Separator, print_json
 from pprint import pprint
 
@@ -26,6 +27,7 @@ def get_default_style():
     return style
 
 def main_menu():
+    tprint('squirrel_maze')
     style = get_default_style()
 
     choices = [
@@ -39,7 +41,7 @@ def main_menu():
         {
             'type': 'list',
             'name': 'selection',
-            'message': 'Squirrel Maze!?',
+            'message': 'Main Menu',
             'choices': choices
         }
     ]
