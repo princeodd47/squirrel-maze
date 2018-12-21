@@ -16,8 +16,8 @@ gob2 = npc.get_goblin("gob2")
 #pprint.pprint(dir(foo))
 
 # example loop over fight commands
-for i in range(1, 10):
-    action.fight(foo, gob1)
+#for i in range(1, 10):
+#    action.fight(foo, gob1)
 
 # example fight list of targets
 #targets = []
@@ -69,3 +69,8 @@ for i in range(1, 10):
 #print("cur_str = {} ".format(foo.cur_str), end="")
 #print("max_str = {} ".format(foo.max_str), end="")
 #print("")
+
+action.fight(foo, gob1)
+action.fight(gob1, foo)
+foo.print_char_sheet()
+gob1.print_char_sheet()

@@ -1,38 +1,48 @@
 import random
-import resources.helpers as helpers
+from squirrel_maze.resources import helpers
 
 def fight(source, target):
-    atk_rand = helpers.get_rand_val(1, 10)
-    if helpers.is_critical_hit(atk_rand, source.cur_crit_hit_chance):
-        atk_rand += helpers.get_crit_hit_bonus()
-    elif helpers.is_critical_fail(atk_rand, source.cur_crit_fail_chance):
-        # TODO: why is his not being called
-        atk_rand += helpers.get_crit_fail_bonus()
+    # TODO: dmg should be a list of dictionaries
+    src_atk_total = source.get_atk_value()
+    tar_def_total = target.get_def_value()
 
-    src_atk_base = source.cur_str + source.cur_dex
-    src_atk_total = src_atk_base + atk_rand
-    if src_atk_total < 0:
-        src_atk_total = 0
-
-    def_rand = helpers.get_rand_val(1, 10)
-    target_def = target.cur_sta + target.cur_dex + def_rand
-    if target_def < 0:
-        target_def = 0
-
-    dmg = src_atk_total - target_def
+    dmg = src_atk_total - tar_def_total
     if dmg < 1:
         dmg = 1
 
+    print("{} (hp: {}) attacks {} (hp: {}) for {} dmg.".format(
+        source.name, source.cur_hp, target.name,
+        target.cur_hp, dmg)
+    )
+
     target.cur_hp -= dmg
-    # TODO: fix
+    # TODO: add stamina reduction
     #source.cur_sta_modify(-1)
     #target.cur_sta_modify(-1)
 
-    print("{}({} + {} = {}) attacks {}({}) for {} dmg.".format(
-        source.name, src_atk_base, atk_rand, src_atk_total,
-        target.name, target_def, dmg))
+    # TODO: add helper.print_atk_result()
 
 def fight_all(source, targets):
     for target in targets:
         fight(source, target)
 
+def fire_bolt(source, target):
+    dmg_val = helpers.get_rand_val(1, 2) + source.level + (source.cur_wil - target.cur_wil)
+    dmg = []
+    dmg.append(
+        {"element": "fire", "damage": dmg_val}
+    )
+    return dmg
+
+def fire_punch(source, target):
+    raise "not implemented"
+    # TODO: calculate magic defense
+    # TODO: calculate normal attack
+    dmg = []
+    dmg.append(
+        {"element": "fire", "damage": get_rand_val(1, 2) + source.level}
+    )
+    dmg.append(
+        {"element": "none", "damage": get_rand_val(1, 10)}
+    )
+    return dmg
