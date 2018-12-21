@@ -161,3 +161,10 @@ def go_to_menu(menu_name):
     elif menu_name == 'combat':
         combat_menu()
 
+def victory():
+    print("Congratulations, you win!")
+    go_to_menu('main')
+
+def defeat():
+    print("You have lost...")
+    go_to_menu('main')

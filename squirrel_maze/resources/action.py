@@ -10,16 +10,17 @@ def fight(source, target):
     if dmg < 1:
         dmg = 1
 
+    print("{} (hp: {}) attacks {} (hp: {}) for {} dmg.".format(
+        source.name, source.cur_hp, target.name,
+        target.cur_hp, dmg)
+    )
+
     target.cur_hp -= dmg
     # TODO: add stamina reduction
     #source.cur_sta_modify(-1)
     #target.cur_sta_modify(-1)
 
     # TODO: add helper.print_atk_result()
-    print("{}({}) attacks {}({}) for {} dmg.".format(
-        source.name, src_atk_total, target.name,
-        tar_def_total, dmg)
-    )
 
 def fight_all(source, targets):
     for target in targets:

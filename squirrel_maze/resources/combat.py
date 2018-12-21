@@ -16,7 +16,10 @@ class Combat:
     def battle(self):
         while helpers.any_members_active(self.actors, 'npc') and helpers.any_members_active(self.actors, 'pc'):
             self.battle_round()
-        menus.go_to_menu('main')
+        if helpers.any_members_active(self.actors, 'pc'):
+            menus.victory()
+        else:
+            menus.defeat()
 
     def battle_round(self):
         for actor in self.actors:
@@ -34,13 +37,11 @@ class Combat:
     # TODO: Add multiple actor support
     def npc_battle_turn(self):
         #self.active_actor.cur_hp -= 1
-        print("{} - {}'s turn".format(self.round, self.active_actor.name))
         unfriendlies = self.active_actor.get_unfriendly_actors(self.actors)
         target_actor = unfriendlies[0]
         action.fight(self.active_actor, target_actor)
 
     def pc_battle_turn(self):
-        print("{} - {}'s turn".format(self.round, self.active_actor.name))
         # TODO: menus.actor_menu()
         unfriendlies = self.active_actor.get_unfriendly_actors(self.actors)
         target_actor = unfriendlies[0]
