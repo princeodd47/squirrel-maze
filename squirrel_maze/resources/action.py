@@ -10,9 +10,9 @@ def fight(source, target):
     if dmg < 1:
         dmg = 1
 
-    print("{} (hp: {}) attacks {} (hp: {}) for {} dmg.".format(
-        source.name, source.cur_hp, target.name,
-        target.cur_hp, dmg)
+    print("{} {} (hp: {}) attacks {} {} (hp: {}) for {} dmg.".format(
+        source.actor_id, source.name, source.cur_hp,
+        target.actor_id, target.name, target.cur_hp, dmg)
     )
 
     target.cur_hp -= dmg
