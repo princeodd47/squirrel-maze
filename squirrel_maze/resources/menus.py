@@ -3,10 +3,12 @@ from __future__ import print_function, unicode_literals
 import sys
 
 from art import tprint
+from examples import custom_style_2
 from PyInquirer import style_from_dict, Token, prompt, Separator, print_json
 from pprint import pprint
 
 from squirrel_maze.resources import actor
+from squirrel_maze.resources import action
 from squirrel_maze.resources import combat
 from squirrel_maze.resources import npc
 
@@ -31,28 +33,31 @@ def main_menu():
     style = get_default_style()
 
     choices = [
-        'combat',
-        'create character (not implemented)',
-        'load character (not implemented)',
-        'Exit'
-        ]
+        {
+            'name': 'Combat',
+            'value': 'combat'
+        },
+        {
+            'name': 'Exit',
+            'value': 'exit'
+        }
+    ]
 
     questions = [
         {
             'type': 'list',
-            'name': 'selection',
             'message': 'Main Menu',
+            'name': 'selection',
             'choices': choices
         }
     ]
 
     answers = prompt(questions)
-    #print(answers)
 
     if 'not implemented' in answers['selection']:
         print("Feature not implemented")
         sys.exit()
-    elif answers['selection'] == 'Exit':
+    elif answers['selection'] == 'exit':
         exit_game_menu('main')
     else:
         if answers['selection'] == 'combat':
@@ -62,54 +67,95 @@ def combat_menu():
     style = get_default_style()
 
     choices = [
-        'Fight a Goblin',
-        'Return'
-        ]
+        {
+            'name': 'Big Goblin',
+            'value': 'goblin'
+        },
+        {
+            'name': 'Return',
+            'value': 'return'
+        }
+    ]
 
     questions = [
         {
             'type': 'list',
             'name': 'selection',
-            'message': 'Combat',
+            'message': 'Choose an opponent',
             'choices': choices
         }
     ]
 
     answers = prompt(questions)
-    #print(answers)
 
     if 'not implemented' in answers['selection']:
         print("Feature not implemented")
         sys.exit()
-    elif answers['selection'] == 'Return':
+    elif answers['selection'] == 'return':
         go_to_menu('main')
     else:
-        if answers['selection'] == 'Fight a Goblin':
+        if answers['selection'] == 'goblin':
+            # TODO: Put in battle_setup()
             actors = []
-            actors.append(actor.Actor(name='ham',pc_type='pc',level=1,max_hp=10,max_str=10,max_dex=10,max_sta=10))
-            actors.append(npc.get_big_goblin())
+            actors.append(actor.Actor(actor_id=len(actors), name='ham',pc_type='pc',level=1,max_hp=10,max_str=10,max_dex=10,max_sta=10))
+            actors.append(npc.get_big_goblin(actor_id=len(actors)))
             cur_battle = combat.Combat(actors)
+            # TODO: write function to let player know what is going on
+            #cur_battle.print_battle_header()
             cur_battle.battle()
 
 def battle_menu(active_actor, actors):
-    # TODO: write actor method to get a list of actions per actor
-    #for action in actor.get_actions():
-
-    # TODO: choices should be a dictionary to easily chose between targets
 
     style = get_default_style()
 
     choices = [
-        'Fight a Goblin'
+        {
+            'key': '0',
+            'name': 'Fight',
+            'value': 'fight'
+        }
     ]
 
-    # TODO: get id from actors of Goblin
-    action.fight(active_actor, actor[0])
+    questions = [
+        {
+            'type': 'list',
+            'name': 'selection',
+            'message': "{} - Choose an action".format(active_actor.name),
+            'choices': choices
+        }
+    ]
 
-    # TODO: find a way to loop over actors, so they go in some sort of order
+    answers = prompt(questions)
+
     # TODO: initiative
 
-    battle_menu(actor[0], actors)
+    unfriendly_target_select_menu(active_actor, actors)
+
+def unfriendly_target_select_menu(active_actor, actors):
+    style = get_default_style()
+    choices = []
+
+    for actor in active_actor.get_unfriendly_actors(actors):
+        choices.append(
+            {
+                'key': actor.actor_id,
+                'name': "{}) {}".format(actor.actor_id, actor.name),
+                'value': actor.actor_id
+            }
+        )
+
+    questions = [
+        {
+            'type': 'list',
+            'name': 'selection',
+            'message': 'Fight -> Choose a target',
+            'choices': choices
+        }
+    ]
+
+    answers = prompt(questions)
+    target_actor = actors[answers['selection']]
+    action.fight(active_actor, target_actor)
 
 def exit_game_menu(prev_menu):
     style = get_default_style()

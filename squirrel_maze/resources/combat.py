@@ -12,6 +12,7 @@ class Combat:
         self.actors = actors
         self.round = 0
         self.get_initiative_order()
+        #self.turn_order = self.get_initiative_order()
 
     def battle(self):
         while helpers.any_members_active(self.actors, 'npc') and helpers.any_members_active(self.actors, 'pc'):
@@ -43,9 +44,10 @@ class Combat:
 
     def pc_battle_turn(self):
         # TODO: menus.actor_menu()
-        unfriendlies = self.active_actor.get_unfriendly_actors(self.actors)
-        target_actor = unfriendlies[0]
-        action.fight(self.active_actor, target_actor)
+        #unfriendlies = self.active_actor.get_unfriendly_actors(self.actors)
+        #target_actor = unfriendlies[0]
+        #action.fight(self.active_actor, target_actor)
+        menus.battle_menu(self.active_actor, self.actors)
 
     def combat_setup(self):
         raise "notEmplementedException"
@@ -59,4 +61,11 @@ class Combat:
 
     def get_initiative_order(self):
         self.actors = helpers.get_actor_list_by_stat(self.actors, 'cur_dex')
+        #actor_list = []
+        #for actor in helpers.get_actor_list_by_stat(self.actors, 'cur_dex'):
+        #    actor_list.append()
+        #return actor_list
 
+    # TODO: add combatant list at the top
+    #def print_battle_header(actors):
+    #
