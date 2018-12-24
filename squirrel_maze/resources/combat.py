@@ -10,6 +10,7 @@ from squirrel_maze.resources import npc
 class Combat:
     def __init__(self, actors):
         self.actors = actors
+        self.get_teams()
         self.round = 0
         self.get_initiative_order()
         #self.turn_order = self.get_initiative_order()
@@ -69,3 +70,13 @@ class Combat:
     # TODO: add combatant list at the top
     #def print_battle_header(actors):
     #
+    def get_teams(self):
+        self.teams = {}
+        for actor in self.actors:
+            if actor.pc_type not in self.teams:
+                self.teams.update(
+                    {
+                        actor.pc_type: []
+                    }
+                )
+            self.teams[actor.pc_type].append(actor.name)

@@ -29,7 +29,7 @@ def get_default_style():
     return style
 
 def main_menu():
-    tprint('squirrel_maze')
+    #tprint('squirrel_maze')
     style = get_default_style()
 
     choices = [
@@ -101,8 +101,13 @@ def combat_menu():
             actors.append(npc.get_big_goblin(actor_id=len(actors)))
             cur_battle = combat.Combat(actors)
             # TODO: write function to let player know what is going on
-            #cur_battle.print_battle_header()
+            print_battle_header(cur_battle)
             cur_battle.battle()
+
+def print_battle_header(battle):
+    print('Battle between:')
+    for team in battle.teams:
+        print("Team: {}: {}".format(team, battle.teams[team]))
 
 def battle_menu(active_actor, actors):
 
