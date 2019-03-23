@@ -1,21 +1,22 @@
 PACKAGE_NAME=squirrel_maze
-PACKAGE_EGG=$(PACKAGE_NAME).egg-info
 
+
+.PHONY: all
+all: analysis test
 
 .PHONY: test
-test: build $(PACKAGE_EGG)
-	pipenv run pytest -vvl
+test: .pipenv-setup
+	-pipenv run pytest -vvl
+
+.PHONY: analysis
+analysis: .pipenv-setup
+	-pipenv run flake8
 
 .PHONY: clean
 clean:
-	@rm -rf build $(PACKAGE_EGG)
+	@rm -rf .pipenv-setup
 
 
-.PHONY: .build-package
-.build-package: build $(PACKAGE_EGG)
-
-build:
-	python3 setup.py bdist_wheel
-
-$(PACKAGE_EGG):
-	python3 setup.py bdist_wheel
+.pipenv-setup:
+	pipenv install --dev
+	@touch $@
