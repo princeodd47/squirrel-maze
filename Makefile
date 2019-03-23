@@ -1,16 +1,18 @@
-PACKAGE_NAME=squirrel_maze
-
+PACKAGE_NAME = squirrel_maze
+PYTEST_COV = --cov=$(PACKAGE_NAME) test/
+PYTEST_ARGS = -vvl $(PYTEST_COV)
+VENV = pipenv run
 
 .PHONY: all
 all: analysis test
 
 .PHONY: test
 test: .pipenv-setup
-	-pipenv run pytest -vvl
+	-$(VENV) pytest $(PYTEST_ARGS)
 
 .PHONY: analysis
 analysis: .pipenv-setup
-	-pipenv run flake8
+	-$(VENV) flake8
 
 .PHONY: clean
 clean:

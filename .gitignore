@@ -12,3 +12,6 @@ build
 
 # temp files
 dist/*
+
+# Make-generated files
+.pipenv-setup
