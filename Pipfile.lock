@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "871c13c717efe52a1b24e8eb3430ede229356f4e82e2f63fd5527f7a4621dcac"
+            "sha256": "e5cbed6145f7f75d2d5063d76d55a67806bace227ec9bfb36d30fac879eaebc1"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -341,6 +341,10 @@
                 "sha256:9f3bcd3c401c3e862ec0ebe6d2c069ebc012ce142cce209c098ccb5b09136e89"
             ],
             "version": "==1.2.1"
+        },
+        "squirrel-maze": {
+            "editable": true,
+            "path": "."
         },
         "typed-ast": {
             "hashes": [
