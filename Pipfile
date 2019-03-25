@@ -1,0 +1,20 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+flake8 = "*"
+mock = "*"
+pytest = "<4.0.0,>=3.0.6"
+pytest-cov = "<3.0.0,>=2.4.0"
+squirrel-maze = {editable = true,path = "."}
+
+[packages]
+art = "==2.6"
+tabulate = ">=0.8.2"
+pprint = "*"
+PyInquirer = "*"
+
+[requires]
+python_version = "3.6"
