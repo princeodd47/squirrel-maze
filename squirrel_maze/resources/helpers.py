@@ -21,12 +21,11 @@ def is_critical_fail(value, crit_fail_chance):
 
 def get_crit_hit_bonus():
     # TODO: add recursive addition on 10s
-    # should that be an advantage?
+    # should that be a passive advantage?
     return int(get_rand_val(1, 10) / 2)
 
 
 def get_crit_fail_bonus():
-    # value = random.randint(1, 10) * -1
     value = int(get_rand_val(1, 10) / 2) * -1
     return value
 
@@ -51,8 +50,8 @@ def any_members_active(actors, pc_type):
 
 
 def get_actor_list_by_stat(actors, stat):
-    # sorted_actors = sorted(actors, key=lambda actor: actor.cur_dex, reverse=True)
     sorted_actors = sorted(actors, key=lambda actor: getattr(actor, stat), reverse=True)
+    # TODO: Break ties using level, then random number
     # sorted_actors = break_tie_between(sorted_actors)
     return sorted_actors
 
@@ -60,8 +59,7 @@ def get_actor_list_by_stat(actors, stat):
 def get_max_stat_from_actor_list(actors, stat):
     # max_val = max(actor.cur_dex for actor in actors)
     max_val = max(getattr(actor, stat) for actor in actors)
-    # TODO: add condition on level, to not call break tie, to
-    # prevent a loop
+    # TODO: add condition on level, to not call break tie, to prevent a loop
     return max_val
 
 

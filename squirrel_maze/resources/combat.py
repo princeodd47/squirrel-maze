@@ -60,6 +60,7 @@ class Combat:
 
     def get_initiative_order(self):
         self.actors = sm_helpers.get_actor_list_by_stat(self.actors, 'cur_dex')
+        # TODO: Turn order should be a list
         # actor_list = []
         # for actor in sm_helpers.get_actor_list_by_stat(self.actors, 'cur_dex'):
         #     actor_list.append()

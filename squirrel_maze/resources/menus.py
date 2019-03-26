@@ -3,19 +3,14 @@ from __future__ import print_function, unicode_literals
 import sys
 
 from art import tprint
-# from examples import custom_style_2
-# from PyInquirer import style_from_dict, Token, prompt, Separator, print_json
 from PyInquirer import style_from_dict, Token, prompt
-# from pprint import pprint
 
 from squirrel_maze.resources import actor as sm_actor
 from squirrel_maze.resources import action as sm_action
 from squirrel_maze.resources import combat as sm_combat
 from squirrel_maze.resources import npc as sm_npc
 
-# TODO: change combat to be an object. This will allow for always
-# being able to access actors and active actor
-
+# TODO: change combat to be an object. This will allow for always being able to access actors and active actor
 # TODO: Figure out how to change colors
 
 
@@ -33,8 +28,9 @@ def get_default_style():
 
 
 def main_menu():
+    # TODO: clear terminal before tprint
     tprint('squirrel_maze')
-    # style = get_default_style()
+    get_default_style()
 
     choices = [
         {
@@ -69,7 +65,7 @@ def main_menu():
 
 
 def combat_menu():
-    # style = get_default_style()
+    get_default_style()
 
     choices = [
         {
@@ -118,8 +114,7 @@ def print_battle_header(battle):
 
 
 def battle_menu(active_actor, actors):
-
-    # style = get_default_style()
+    get_default_style()
 
     choices = [
         {
@@ -145,7 +140,7 @@ def battle_menu(active_actor, actors):
 
 
 def unfriendly_target_select_menu(active_actor, actors):
-    # style = get_default_style()
+    get_default_style()
     choices = []
 
     for actor in active_actor.get_unfriendly_actors(actors):
@@ -172,7 +167,7 @@ def unfriendly_target_select_menu(active_actor, actors):
 
 
 def exit_game_menu(prev_menu):
-    # style = get_default_style()
+    get_default_style()
 
     choices = [
         'Yes',
@@ -195,10 +190,10 @@ def exit_game_menu(prev_menu):
         go_to_menu(prev_menu)
 
 
-# TODO: correct this function
+# TODO: correct this unfinished function
 # def actor_menu(actor, actors):
 #     cur_menu = 'actor_menu'
-#     style = get_default_style()
+#     get_default_style()
 #
 #     choices = [
 #         'Fight'
