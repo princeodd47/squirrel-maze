@@ -8,10 +8,10 @@ from art import tprint
 from PyInquirer import style_from_dict, Token, prompt
 # from pprint import pprint
 
-from squirrel_maze.resources import actor
-from squirrel_maze.resources import action
-from squirrel_maze.resources import combat
-from squirrel_maze.resources import npc
+from squirrel_maze.resources import actor as sm_actor
+from squirrel_maze.resources import action as sm_action
+from squirrel_maze.resources import combat as sm_combat
+from squirrel_maze.resources import npc as sm_npc
 
 # TODO: change combat to be an object. This will allow for always
 # being able to access actors and active actor
@@ -34,7 +34,7 @@ def get_default_style():
 
 def main_menu():
     tprint('squirrel_maze')
-    style = get_default_style()
+    # style = get_default_style()
 
     choices = [
         {
@@ -69,7 +69,7 @@ def main_menu():
 
 
 def combat_menu():
-    style = get_default_style()
+    # style = get_default_style()
 
     choices = [
         {
@@ -102,10 +102,10 @@ def combat_menu():
         if answers['selection'] == 'goblin':
             # TODO: Put in battle_setup()
             actors = []
-            actors.append(actor.Actor(actor_id=len(actors), name='ham', pc_type='pc', level=1, max_hp=10, max_str=10,
+            actors.append(sm_actor.Actor(actor_id=len(actors), name='ham', pc_type='pc', level=1, max_hp=10, max_str=10,
                           max_dex=10, max_sta=10))
-            actors.append(npc.get_big_goblin(actor_id=len(actors)))
-            cur_battle = combat.Combat(actors)
+            actors.append(sm_npc.get_big_goblin(actor_id=len(actors)))
+            cur_battle = sm_combat.Combat(actors)
             # TODO: write function to let player know what is going on
             print_battle_header(cur_battle)
             cur_battle.battle()
@@ -117,36 +117,34 @@ def print_battle_header(battle):
         print("Team: {}: {}".format(team, battle.teams[team]))
 
 
-def battle_menu(active_actor, actors):
-
-    style = get_default_style()
-
-    choices = [
-        {
-            'key': '0',
-            'name': 'Fight',
-            'value': 'fight'
-        }
-    ]
-
-    questions = [
-        {
-            'type': 'list',
-            'name': 'selection',
-            'message': "{} - Choose an action".format(active_actor.name),
-            'choices': choices
-        }
-    ]
-
-    answers = prompt(questions)
-
-    # TODO: initiative
-
-    unfriendly_target_select_menu(active_actor, actors)
+# def battle_menu(active_actor, actors):
+#
+#      style = get_default_style()
+#
+#      choices = [
+#          {
+#              'key': '0',
+#              'name': 'Fight',
+#              'value': 'fight'
+#          }
+#      ]
+#
+#      questions = [
+#          {
+#              'type': 'list',
+#              'name': 'selection',
+#              'message': "{} - Choose an action".format(active_actor.name),
+#              'choices': choices
+#          }
+#      ]
+#
+#      answers = prompt(questions)
+#     # TODO: initiative
+#     unfriendly_target_select_menu(active_actor, actors)
 
 
 def unfriendly_target_select_menu(active_actor, actors):
-    style = get_default_style()
+    # style = get_default_style()
     choices = []
 
     for actor in active_actor.get_unfriendly_actors(actors):
@@ -169,11 +167,11 @@ def unfriendly_target_select_menu(active_actor, actors):
 
     answers = prompt(questions)
     target_actor = actors[answers['selection']]
-    action.fight(active_actor, target_actor)
+    sm_action.fight(active_actor, target_actor)
 
 
 def exit_game_menu(prev_menu):
-    style = get_default_style()
+    # style = get_default_style()
 
     choices = [
         'Yes',
