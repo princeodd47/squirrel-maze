@@ -1,8 +1,8 @@
-import pytest
 import unittest
 
 from squirrel_maze.resources import npc
 from squirrel_maze.resources import actor
+
 
 class TestNpc(unittest.TestCase):
 

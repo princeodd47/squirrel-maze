@@ -1,21 +1,26 @@
-import pytest
 import unittest
-from unittest.mock import MagicMock, patch, call
+from unittest.mock import patch, call
 
 from squirrel_maze.resources import actor
+
 
 class TestActor(unittest.TestCase):
 
     def get_single_actor(self):
-        return actor.Actor(name='ham',pc_type='pc',level=1,max_hp=10,max_str=10,max_dex=10,max_sta=10)
+        return actor.Actor(name='ham', pc_type='pc', level=1, max_hp=10, max_str=10, max_dex=10, max_sta=10)
 
     def get_multiple_actors(self):
         actors = []
-        actors.append(actor.Actor(actor_id=0, name='spam',pc_type='pc',level=1,max_hp=10,max_str=10,max_dex=10,max_sta=10))
-        actors.append(actor.Actor(actor_id=1, name='eggs',pc_type='pc',level=1,max_hp=5,max_str=5,max_dex=5,max_sta=5))
-        actors.append(actor.Actor(actor_id=2, name='foo',pc_type='npc',level=1,max_hp=6,max_str=6,max_dex=6,max_sta=6))
-        actors.append(actor.Actor(actor_id=3, name='bar',pc_type='npc',level=1,max_hp=6,max_str=6,max_dex=6,max_sta=6))
-        actors.append(actor.Actor(actor_id=4, name='baz',pc_type='npc',level=1,max_hp=2,max_str=2,max_dex=2,max_sta=2))
+        actors.append(actor.Actor(actor_id=0, name='spam', pc_type='pc', level=1, max_hp=10, max_str=10, max_dex=10,
+                      max_sta=10))
+        actors.append(actor.Actor(actor_id=1, name='eggs', pc_type='pc', level=1, max_hp=5, max_str=5, max_dex=5,
+                      max_sta=5))
+        actors.append(actor.Actor(actor_id=2, name='foo', pc_type='npc', level=1, max_hp=6, max_str=6, max_dex=6,
+                      max_sta=6))
+        actors.append(actor.Actor(actor_id=3, name='bar', pc_type='npc', level=1, max_hp=6, max_str=6, max_dex=6,
+                      max_sta=6))
+        actors.append(actor.Actor(actor_id=4, name='baz', pc_type='npc', level=1, max_hp=2, max_str=2, max_dex=2,
+                      max_sta=2))
         return actors
 
     def test_initialize(self):
@@ -79,13 +84,13 @@ class TestActor(unittest.TestCase):
         actor_ham.restore_all_stats_to_max()
         mock_restore.assert_has_calls(calls, any_order=True)
 
-    @patch('squirrel_maze.resources.actor.helpers.random.randint', return_value = 6, autospec=True)
+    @patch('squirrel_maze.resources.actor.helpers.random.randint', return_value=6, autospec=True)
     def test_get_atk_value(self, mock_rand):
         actor_ham = self.get_single_actor()
         atk_val = actor_ham.get_atk_value()
         assert atk_val == 26
 
-    @patch('squirrel_maze.resources.actor.helpers.random.randint', return_value = 6, autospec=True)
+    @patch('squirrel_maze.resources.actor.helpers.random.randint', return_value=6, autospec=True)
     def test_get_def_value(self, mock_rand):
         actor_ham = self.get_single_actor()
         atk_val = actor_ham.get_def_value()
@@ -98,7 +103,7 @@ class TestActor(unittest.TestCase):
         friendlies = actor_ham.get_friendly_actors(actors)
         assert len(friendlies) == 2
         assert (
-                all([x.pc_type is 'pc' for x in friendlies])
+                all([x.pc_type == 'pc' for x in friendlies])
         ) is True
 
     def test_get_unfriendly_actors(self):
@@ -108,11 +113,11 @@ class TestActor(unittest.TestCase):
         unfriendlies = actor_ham.get_unfriendly_actors(actors)
         assert len(unfriendlies) == 3
         assert (
-                all([x.pc_type is not 'pc' for x in unfriendlies])
+                all([x.pc_type != 'pc' for x in unfriendlies])
         ) is True
 
     # TODO: Add to integration tests
-    #def test_restore_all_stats_to_max(self):
+    # def test_restore_all_stats_to_max(self):
     #    actor_ham = actor.Actor(
     #            max_hp = 10, max_str = 10, max_dex = 10, max_sta = 10)
     #    actor_ham.modify_stat("cur_hp", -1)
@@ -130,5 +135,3 @@ class TestActor(unittest.TestCase):
     #    self.assertTrue(actor_ham.max_sta == 10)
     #    self.assertTrue(actor_ham.max_crit_hit_chance == 10)
     #    self.assertTrue(actor_ham.max_crit_fail_chance == 1)
-
-

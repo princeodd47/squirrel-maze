@@ -12,7 +12,7 @@ test: .pipenv-setup
 
 .PHONY: analysis
 analysis: .pipenv-setup
-	-$(VENV) flake8
+	$(VENV) flake8
 
 .PHONY: clean
 clean:

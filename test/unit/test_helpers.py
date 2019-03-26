@@ -1,4 +1,3 @@
-import pytest
 import unittest
 
 from unittest.mock import patch
@@ -6,9 +5,10 @@ from unittest.mock import patch
 from squirrel_maze.resources import helpers
 from squirrel_maze.resources import actor
 
+
 class TestHelper(unittest.TestCase):
 
-    @patch('squirrel_maze.resources.helpers.random.randint', return_value = 6, autospec=True)
+    @patch('squirrel_maze.resources.helpers.random.randint', return_value=6, autospec=True)
     def test_get_rand_val(self, mock_rand):
         test_rand_num = helpers.get_rand_val(1, 10)
         assert test_rand_num == 6
@@ -30,23 +30,23 @@ class TestHelper(unittest.TestCase):
         assert helpers.is_critical_fail(4, 1) is False
         assert helpers.is_critical_fail(2, 1) is False
 
-    @patch('squirrel_maze.resources.helpers.random.randint', return_value = 6, autospec=True)
+    @patch('squirrel_maze.resources.helpers.random.randint', return_value=6, autospec=True)
     def test_get_crit_hit_bonus(self, mock_rand):
-        value = helpers.get_crit_hit_bonus() 
+        value = helpers.get_crit_hit_bonus()
 
         assert value == 3
         mock_rand.assert_called_with(1, 10)
 
-    @patch('squirrel_maze.resources.helpers.random.randint', return_value = 6, autospec=True)
+    @patch('squirrel_maze.resources.helpers.random.randint', return_value=6, autospec=True)
     def test_get_crit_fail_bonus(self, mock_rand):
-        value = helpers.get_crit_fail_bonus() 
+        value = helpers.get_crit_fail_bonus()
 
         assert value == -3
         mock_rand.assert_called_with(1, 10)
 
     def test_get_stat_list(self):
         test_stats = ["hp", "str", "dex", "sta", "wil",
-                     "crit_hit_chance", "crit_fail_chance"]
+                      "crit_hit_chance", "crit_fail_chance"]
 
         assert test_stats == helpers.get_stat_list()
 
@@ -64,7 +64,7 @@ class TestHelper(unittest.TestCase):
         actors.append(actor.Actor(max_hp=0, pc_type="pc"))
         actors.append(actor.Actor(max_hp=0, pc_type="npc"))
 
-        assert helpers.any_members_active(actors, "pc") == True
+        assert helpers.any_members_active(actors, "pc") is True
 
     def test_get_max_stat_from_actor_list(self):
         actors = []

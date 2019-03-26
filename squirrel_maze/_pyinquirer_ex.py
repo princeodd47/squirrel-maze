@@ -63,7 +63,7 @@ questions = [
                 'name': 'Extra cheese'
             }
         ],
-        'validate': lambda answer: 'You must choose at least one topping.' \
+        'validate': lambda answer: 'You must choose at least one topping.'
         if len(answer) == 0 else True
     }
 ]

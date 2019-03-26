@@ -1,13 +1,15 @@
-#from prettytable import PrettyTable
-#from texttabele import Texttable
-#terminaltables
-#asciitable
+# from prettytable import PrettyTable
+# from texttabele import Texttable
+# terminaltables
+# asciitable
 from tabulate import tabulate
 
 from squirrel_maze.resources import helpers
 
+
 class Actor:
-    def __init__(self, actor_id=0, pc_type="npc", name="unknown", level=0, max_hp=0, max_str=0, max_dex=0, max_sta=0, max_wil=0):
+    def __init__(self, actor_id=0, pc_type="npc", name="unknown", level=0, max_hp=0, max_str=0, max_dex=0, max_sta=0,
+                 max_wil=0):
         self.actor_id = actor_id
         self.pc_type = pc_type
         self.name = name
@@ -18,7 +20,7 @@ class Actor:
         self.max_crit_fail_chance = 1
         self.cur_crit_fail_chance = 1
         self.set_stats(max_hp, max_str, max_dex, max_sta, max_wil)
-    
+
     def set_stats(self, max_hp, max_str, max_dex, max_sta, max_wil):
         self.max_hp = max_hp
         self.max_str = max_str
@@ -32,17 +34,6 @@ class Actor:
         self.cur_wil = max_wil
 
     def print_char_sheet(self):
-        actor = {"name": self.name,
-                "pc_type": self.pc_type,
-                "level": self.level
-        }
-
-        #stats = get_stat_list()
-        #for stat in stats:
-        #    actor.append({"max_".format(
-
-        #actor.append({"max_".format(): 4})
-
         print(
             tabulate(
                 {
@@ -75,7 +66,7 @@ class Actor:
 
     def restore_stat_to_max(self, stat):
         self.__setattr__("cur_{}".format(stat), self.__getattribute__("max_{}".format(stat)))
-        
+
     def restore_all_stats_to_max(self):
         stats = helpers.get_stat_list()
         for stat in stats:
