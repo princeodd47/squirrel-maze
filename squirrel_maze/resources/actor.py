@@ -1,7 +1,3 @@
-# from prettytable import PrettyTable
-# from texttabele import Texttable
-# terminaltables
-# asciitable
 from tabulate import tabulate
 
 from squirrel_maze.resources import helpers
