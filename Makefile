@@ -1,5 +1,5 @@
 PACKAGE_NAME = squirrel_maze
-PYTEST_COV = --cov=$(PACKAGE_NAME) test/
+PYTEST_COV = --cov=$(PACKAGE_NAME) --cov-report term-missing --cov-report html test/
 PYTEST_ARGS = -vvl $(PYTEST_COV)
 VENV = pipenv run
 
@@ -16,7 +16,7 @@ analysis: .pipenv-setup
 
 .PHONY: clean
 clean:
-	@rm -rf .pipenv-setup
+	@rm -rf .pipenv-setup .coverage .pytest_cache htmlcov
 
 
 .pipenv-setup:

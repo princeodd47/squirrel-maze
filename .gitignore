@@ -3,9 +3,9 @@ __pycache__
 *.egg-info
 build
 
-# tox files
-.tox
+# pytest files
 .coverage
+htmlcov
 
 # swap files
 *.swp
