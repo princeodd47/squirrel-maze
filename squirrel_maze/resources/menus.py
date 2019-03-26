@@ -117,30 +117,31 @@ def print_battle_header(battle):
         print("Team: {}: {}".format(team, battle.teams[team]))
 
 
-# def battle_menu(active_actor, actors):
-#
-#      style = get_default_style()
-#
-#      choices = [
-#          {
-#              'key': '0',
-#              'name': 'Fight',
-#              'value': 'fight'
-#          }
-#      ]
-#
-#      questions = [
-#          {
-#              'type': 'list',
-#              'name': 'selection',
-#              'message': "{} - Choose an action".format(active_actor.name),
-#              'choices': choices
-#          }
-#      ]
-#
-#      answers = prompt(questions)
-#     # TODO: initiative
-#     unfriendly_target_select_menu(active_actor, actors)
+def battle_menu(active_actor, actors):
+
+    # style = get_default_style()
+
+    choices = [
+        {
+            'key': '0',
+            'name': 'Fight',
+            'value': 'fight'
+        }
+    ]
+
+    questions = [
+        {
+            'type': 'list',
+            'name': 'selection',
+            'message': "{} - Choose an action".format(active_actor.name),
+            'choices': choices
+        }
+    ]
+
+    # answers = prompt(questions)
+    prompt(questions)
+    # TODO: initiative
+    unfriendly_target_select_menu(active_actor, actors)
 
 
 def unfriendly_target_select_menu(active_actor, actors):
