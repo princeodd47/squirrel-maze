@@ -1,5 +1,5 @@
-import random
 from squirrel_maze.resources import helpers
+
 
 def fight(source, target):
     # TODO: dmg should be a list of dictionaries
@@ -17,14 +17,16 @@ def fight(source, target):
 
     target.cur_hp -= dmg
     # TODO: add stamina reduction
-    #source.cur_sta_modify(-1)
-    #target.cur_sta_modify(-1)
+    # source.cur_sta_modify(-1)
+    # target.cur_sta_modify(-1)
 
     # TODO: add helper.print_atk_result()
+
 
 def fight_all(source, targets):
     for target in targets:
         fight(source, target)
+
 
 def fire_bolt(source, target):
     dmg_val = helpers.get_rand_val(1, 2) + source.level + (source.cur_wil - target.cur_wil)
@@ -34,15 +36,16 @@ def fire_bolt(source, target):
     )
     return dmg
 
+
 def fire_punch(source, target):
     raise "not implemented"
     # TODO: calculate magic defense
     # TODO: calculate normal attack
     dmg = []
     dmg.append(
-        {"element": "fire", "damage": get_rand_val(1, 2) + source.level}
+        {"element": "fire", "damage": helpers.get_rand_val(1, 2) + source.level}
     )
     dmg.append(
-        {"element": "none", "damage": get_rand_val(1, 10)}
+        {"element": "none", "damage": helpers.get_rand_val(1, 10)}
     )
     return dmg

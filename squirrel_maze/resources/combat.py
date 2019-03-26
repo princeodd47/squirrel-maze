@@ -1,5 +1,3 @@
-import sys
-
 from squirrel_maze.resources import actor
 from squirrel_maze.resources import action
 from squirrel_maze.resources import helpers
@@ -13,7 +11,7 @@ class Combat:
         self.get_teams()
         self.round = 0
         self.get_initiative_order()
-        #self.turn_order = self.get_initiative_order()
+        # self.turn_order = self.get_initiative_order()
 
     def battle(self):
         while helpers.any_members_active(self.actors, 'npc') and helpers.any_members_active(self.actors, 'pc'):
@@ -38,37 +36,37 @@ class Combat:
 
     # TODO: Add multiple actor support
     def npc_battle_turn(self):
-        #self.active_actor.cur_hp -= 1
+        # self.active_actor.cur_hp -= 1
         unfriendlies = self.active_actor.get_unfriendly_actors(self.actors)
         target_actor = unfriendlies[0]
         action.fight(self.active_actor, target_actor)
 
     def pc_battle_turn(self):
         # TODO: menus.actor_menu()
-        #unfriendlies = self.active_actor.get_unfriendly_actors(self.actors)
-        #target_actor = unfriendlies[0]
-        #action.fight(self.active_actor, target_actor)
+        # unfriendlies = self.active_actor.get_unfriendly_actors(self.actors)
+        # target_actor = unfriendlies[0]
+        # action.fight(self.active_actor, target_actor)
         menus.battle_menu(self.active_actor, self.actors)
 
     def combat_setup(self):
         raise "notEmplementedException"
         actors = []
         actors.append(npc.get_goblin("Fooblin"))
-        char1 = Actor(pc_type="pc", name="Bar", level=1, max_hp=20,
-                      max_str=10, max_dex=10, max_sta=10, max_wil=5)
+        char1 = actor.Actor(pc_type="pc", name="Bar", level=1, max_hp=20,
+                            max_str=10, max_dex=10, max_sta=10, max_wil=5)
         actors.append(char1)
-        #print("{}({}) fights {}({})".format(actors[0].name, actors[0].pc_type, actors[1].name, actors[1].pc_type))
-        combat(actors)
+        # print("{}({}) fights {}({})".format(actors[0].name, actors[0].pc_type, actors[1].name, actors[1].pc_type))
+        Combat(actors)
 
     def get_initiative_order(self):
         self.actors = helpers.get_actor_list_by_stat(self.actors, 'cur_dex')
-        #actor_list = []
-        #for actor in helpers.get_actor_list_by_stat(self.actors, 'cur_dex'):
-        #    actor_list.append()
-        #return actor_list
+        # actor_list = []
+        # for actor in helpers.get_actor_list_by_stat(self.actors, 'cur_dex'):
+        #     actor_list.append()
+        # return actor_list
 
     # TODO: add combatant list at the top
-    #def print_battle_header(actors):
+    # def print_battle_header(actors):
     #
     def get_teams(self):
         self.teams = {}

@@ -1,9 +1,9 @@
-import pytest
 import unittest
 
 from unittest.mock import patch
 
 from squirrel_maze.resources import menus
+
 
 class TestMenus(unittest.TestCase):
 
