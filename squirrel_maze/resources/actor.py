@@ -4,10 +4,11 @@ from squirrel_maze.resources import helpers
 
 
 class Actor:
-    def __init__(self, actor_id=0, pc_type="npc", name="unknown", level=0, max_hp=0, max_str=0, max_dex=0, max_sta=0,
-                 max_wil=0):
+    def __init__(self, actor_id=0, pc_type="npc", affiliation="friendly", name="unknown", level=0, max_hp=0,
+                 max_str=0, max_dex=0, max_sta=0, max_wil=0):
         self.actor_id = actor_id
         self.pc_type = pc_type
+        self.affiliation = affiliation
         self.name = name
         self.level = level
         self.status = "normal"
@@ -97,6 +98,6 @@ class Actor:
     def get_unfriendly_actors(self, actors):
         friendlies = []
         for actor in actors:
-            if self.pc_type != actor.pc_type:
+            if self.affiliation != actor.affiliation:
                 friendlies.append(actor)
         return friendlies
