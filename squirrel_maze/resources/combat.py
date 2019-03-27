@@ -49,7 +49,7 @@ class Combat:
         sm_menus.battle_menu(self.active_actor, self.actors)
 
     def combat_setup(self):
-        raise "notEmplementedException"
+        raise NotImplementedError
         actors = []
         actors.append(sm_npc.get_goblin("Fooblin"))
         char1 = sm_actor.Actor(pc_type="pc", name="Bar", level=1, max_hp=20,
@@ -59,7 +59,7 @@ class Combat:
         Combat(actors)
 
     def get_initiative_order(self):
-        self.actors = sm_helpers.get_actor_list_by_stat(self.actors, 'cur_dex')
+        self.actors = sm_helpers.get_actor_list_by_stat(self.actors, 'cur_dex', 'level')
         # TODO: Turn order should be a list
         # actor_list = []
         # for actor in sm_helpers.get_actor_list_by_stat(self.actors, 'cur_dex'):
