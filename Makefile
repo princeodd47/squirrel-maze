@@ -1,6 +1,6 @@
 PACKAGE_NAME = squirrel_maze
 PYTEST_COV = --cov=$(PACKAGE_NAME) --cov-report term-missing --cov-report html test/
-PYTEST_ARGS = -vvl --ignore=./.venv $(PYTEST_COV)
+PYTEST_ARGS = -vvl $(PYTEST_COV)
 VENV = pipenv run
 
 .PHONY: all
