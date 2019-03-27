@@ -49,8 +49,9 @@ def any_members_active(actors, pc_type):
     return False
 
 
-def get_actor_list_by_stat(actors, stat):
-    sorted_actors = sorted(actors, key=lambda actor: getattr(actor, stat), reverse=True)
+def get_actor_list_by_stat(actors, stat_primary, stat_secondary):
+    sorted_actors = sorted(actors, key=lambda actor: (getattr(actor, stat_primary), getattr(actor, stat_secondary)),
+                           reverse=True)
     # TODO: Break ties using level, then random number
     # sorted_actors = break_tie_between(sorted_actors)
     return sorted_actors
@@ -61,21 +62,3 @@ def get_max_stat_from_actor_list(actors, stat):
     max_val = max(getattr(actor, stat) for actor in actors)
     # TODO: add condition on level, to not call break tie, to prevent a loop
     return max_val
-
-
-def break_tie_between_actors(actors, stat):
-    max_val = get_max_stat_from_actor_list(actors, stat)
-    max_actors = []
-    for actor in actors:
-        if getattr(actor, stat) == max_val:
-            max_actors.append(actor)
-    max_actors = get_actor_list_by_stat(max_actors, 'level')
-    # if len(max_actors) > 1:
-    #     # TODO: sort actors by level, then randomly
-    #     foo = "foo"
-
-    i = 0
-    for actor in max_actors:
-        actors[i] = actor
-        i += 1
-    return actors
