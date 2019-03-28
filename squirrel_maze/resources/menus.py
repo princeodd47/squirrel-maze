@@ -10,9 +10,6 @@ from squirrel_maze.resources import action as sm_action
 from squirrel_maze.resources import combat as sm_combat
 from squirrel_maze.resources import npc as sm_npc
 
-# TODO: change combat to be an object. This will allow for always being able to access actors and active actor
-# TODO: Figure out how to change colors
-
 
 def get_default_style():
     style = style_from_dict({
@@ -28,7 +25,6 @@ def get_default_style():
 
 
 def main_menu():
-    # TODO: clear terminal before tprint
     tprint('squirrel_maze')
     get_default_style()
 
@@ -96,13 +92,11 @@ def combat_menu():
         go_to_menu('main')
     else:
         if answers['selection'] == 'goblin':
-            # TODO: Put in battle_setup()
             actors = []
             actors.append(sm_actor.Actor(actor_id=len(actors), name='ham', pc_type='pc', level=1, max_hp=10, max_str=10,
                           max_dex=10, max_sta=10))
             actors.append(sm_npc.get_big_goblin(actor_id=len(actors)))
             cur_battle = sm_combat.Combat(actors)
-            # TODO: write function to let player know what is going on
             print_battle_header(cur_battle)
             cur_battle.battle()
 
@@ -135,7 +129,6 @@ def battle_menu(active_actor, actors):
 
     # answers = prompt(questions)
     prompt(questions)
-    # TODO: initiative
     unfriendly_target_select_menu(active_actor, actors)
 
 
@@ -188,31 +181,6 @@ def exit_game_menu(prev_menu):
         sys.exit()
     else:
         go_to_menu(prev_menu)
-
-
-# TODO: correct this unfinished function
-# def actor_menu(actor, actors):
-#     cur_menu = 'actor_menu'
-#     get_default_style()
-#
-#     choices = [
-#         'Fight'
-#         ]
-#
-#     questions = [
-#         {
-#             'type': 'list',
-#             'name': 'selection',
-#             'message': 'Choose your action.',
-#             'choices': choices
-#         }
-#     ]
-#
-#     answers = prompt(questions)
-#     if answers['selection'] == 'Fight':
-#         sys.exit()
-#     else:
-#         go_to_menu(prev_menu)
 
 
 def go_to_menu(menu_name):
