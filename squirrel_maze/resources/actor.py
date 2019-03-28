@@ -91,7 +91,7 @@ class Actor:
     def get_friendly_actors(self, actors):
         friendlies = []
         for actor in actors:
-            if self.pc_type == actor.pc_type:
+            if self.affiliation == actor.affiliation:
                 friendlies.append(actor)
         return friendlies
 
