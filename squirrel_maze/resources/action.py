@@ -2,7 +2,6 @@ from squirrel_maze.resources import helpers
 
 
 def fight(source, target):
-    # TODO: dmg should be a list of dictionaries
     src_atk_total = source.get_atk_value()
     tar_def_total = target.get_def_value()
 
@@ -16,11 +15,6 @@ def fight(source, target):
     )
 
     target.cur_hp -= dmg
-    # TODO: add stamina reduction
-    # source.cur_sta_modify(-1)
-    # target.cur_sta_modify(-1)
-
-    # TODO: add helper.print_atk_result()
 
 
 def fight_all(source, targets):
@@ -39,8 +33,6 @@ def fire_bolt(source, target):
 
 def fire_punch(source, target):
     raise "not implemented"
-    # TODO: calculate magic defense
-    # TODO: calculate normal attack
     dmg = []
     dmg.append(
         {"element": "fire", "damage": helpers.get_rand_val(1, 2) + source.level}

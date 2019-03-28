@@ -34,18 +34,12 @@ class Combat:
         else:
             self.pc_battle_turn()
 
-    # TODO: Add multiple actor support
     def npc_battle_turn(self):
-        # self.active_actor.cur_hp -= 1
         unfriendlies = self.active_actor.get_unfriendly_actors(self.actors)
         target_actor = unfriendlies[0]
         sm_action.fight(self.active_actor, target_actor)
 
     def pc_battle_turn(self):
-        # TODO: sm_menus.actor_menu()
-        # unfriendlies = self.active_actor.get_unfriendly_actors(self.actors)
-        # target_actor = unfriendlies[0]
-        # sm_action.fight(self.active_actor, target_actor)
         sm_menus.battle_menu(self.active_actor, self.actors)
 
     def combat_setup(self):
@@ -60,15 +54,7 @@ class Combat:
 
     def get_initiative_order(self):
         self.actors = sm_helpers.get_actor_list_by_stat(self.actors, 'cur_dex', 'level')
-        # TODO: Turn order should be a list
-        # actor_list = []
-        # for actor in sm_helpers.get_actor_list_by_stat(self.actors, 'cur_dex'):
-        #     actor_list.append()
-        # return actor_list
 
-    # TODO: add combatant list at the top
-    # def print_battle_header(actors):
-    #
     def get_teams(self):
         self.teams = {}
         for actor in self.actors:

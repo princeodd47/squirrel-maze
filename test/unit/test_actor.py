@@ -117,23 +117,3 @@ class TestActor(unittest.TestCase):
         assert (
                 all([x.affiliation != actor_ham.affiliation for x in unfriendlies])
         ) is True
-
-    # TODO: Add to integration tests
-    # def test_restore_all_stats_to_max(self):
-    #    actor_ham = actor.Actor(
-    #            max_hp = 10, max_str = 10, max_dex = 10, max_sta = 10)
-    #    actor_ham.modify_stat("cur_hp", -1)
-    #    actor_ham.modify_stat("cur_str", -2)
-    #    actor_ham.modify_stat("cur_dex", -3)
-    #    actor_ham.modify_stat("cur_sta", -4)
-    #    actor_ham.modify_stat("cur_crit_hit_chance", -5)
-    #    actor_ham.modify_stat("cur_crit_fail_chance", 6)
-
-    #    actor_ham.restore_all_stats_to_max()
-
-    #    self.assertTrue(actor_ham.max_hp == 10)
-    #    self.assertTrue(actor_ham.max_str == 10)
-    #    self.assertTrue(actor_ham.max_dex == 10)
-    #    self.assertTrue(actor_ham.max_sta == 10)
-    #    self.assertTrue(actor_ham.max_crit_hit_chance == 10)
-    #    self.assertTrue(actor_ham.max_crit_fail_chance == 1)

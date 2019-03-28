@@ -25,7 +25,7 @@ class TestCombat(unittest.TestCase):
     def test_initialize(self):
         combat_ham = combat.Combat(self.get_multiple_actors())
 
-        self.assertTrue(isinstance(combat_ham, combat.Combat))
+        assert isinstance(combat_ham, combat.Combat)
         assert combat_ham.round == 0
 
     def test_get_teams(self):
@@ -36,7 +36,3 @@ class TestCombat(unittest.TestCase):
         assert len(combat_ham.teams) == 2
         assert combat_ham.teams['pc'] == ['spam', 'eggs']
         assert combat_ham.teams['npc'] == ['foo', 'bar', 'baz']
-
-    # @patch('squirrel_maze.resources.helpers.random.randint', return_value = 6, autospec=True)
-    # def test_get_initiative_order(self):
-    #     assert True

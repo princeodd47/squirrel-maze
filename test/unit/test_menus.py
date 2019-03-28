@@ -7,7 +7,6 @@ from squirrel_maze.resources import menus
 
 class TestMenus(unittest.TestCase):
 
-    # TODO: Is there a better way to test this?
     @patch('squirrel_maze.resources.menus.main_menu')
     def test_go_to_menu_main(self, mock_main):
         menus.go_to_menu('main')
