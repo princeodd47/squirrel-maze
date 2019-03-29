@@ -38,7 +38,7 @@ def calc_magic_defense(source, target):
     return source.cur_wil - target.cur_wil
 
 
-def any_members_active(actors, pc_type):
+def any_members_alive(actors, pc_type):
     for actor in actors:
         if actor.pc_type == pc_type and actor.cur_hp > 0:
             return True
