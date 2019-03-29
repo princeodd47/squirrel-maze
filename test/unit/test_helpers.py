@@ -58,13 +58,13 @@ class TestHelper(unittest.TestCase):
 
         assert md == -3
 
-    def test_any_members_active(self):
+    def test_any_members_alive(self):
         actors = []
         actors.append(actor.Actor(max_hp=10, pc_type='pc'))
         actors.append(actor.Actor(max_hp=0, pc_type='pc'))
         actors.append(actor.Actor(max_hp=0, pc_type='npc'))
 
-        assert helpers.any_members_active(actors, 'pc') is True
+        assert helpers.any_members_alive(actors, 'pc') is True
 
     def test_get_max_stat_from_actor_list(self):
         actors = []

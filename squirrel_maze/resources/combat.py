@@ -14,9 +14,9 @@ class Combat:
         # self.turn_order = self.get_initiative_order()
 
     def battle(self):
-        while sm_helpers.any_members_active(self.actors, 'npc') and sm_helpers.any_members_active(self.actors, 'pc'):
+        while sm_helpers.any_members_alive(self.actors, 'npc') and sm_helpers.any_members_alive(self.actors, 'pc'):
             self.battle_round()
-        if sm_helpers.any_members_active(self.actors, 'pc'):
+        if sm_helpers.any_members_alive(self.actors, 'pc'):
             sm_menus.victory()
         else:
             sm_menus.defeat()
