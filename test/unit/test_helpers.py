@@ -1,6 +1,5 @@
 import unittest
 
-from tinydb import TinyDB, Query
 from unittest.mock import patch
 
 from squirrel_maze.resources import helpers
@@ -86,10 +85,3 @@ class TestHelper(unittest.TestCase):
         sorted_actors = helpers.get_actor_list_by_stat(actors, 'cur_dex', 'level')
 
         assert sorted_actors[0].name == 'baz'
-
-    def test_query_database(self):
-        db = TinyDB('test/unit/test_files/db.json')
-        pcs = db.table('pcs')
-        PcsQuery = Query()
-        ham = pcs.search(PcsQuery.name == 'Ham')
-        assert ham[0]['attributes']['hp'] == 10
