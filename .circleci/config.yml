@@ -29,9 +29,15 @@ jobs:
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
       - run:
-          name: run tests
+          name: Analysis
           command: |
-            make all
+            make analysis
+      - run:
+          name: Tests
+          command: |
+            make test
+      - store_test_results:
+          path: test_results
 
       - store_artifacts:
           path: htmlcov

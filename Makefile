@@ -1,6 +1,6 @@
 PACKAGE_NAME = squirrel_maze
 PYTEST_COV = --cov=$(PACKAGE_NAME) --cov-report term-missing --cov-report html test/
-PYTEST_ARGS = -vvl $(PYTEST_COV)
+PYTEST_ARGS = -vvl --junitxml=test_results/junit.xml $(PYTEST_COV)
 VENV = pipenv run
 
 .PHONY: all
@@ -16,7 +16,7 @@ analysis: .pipenv-setup
 
 .PHONY: clean
 clean:
-	@rm -rf .pipenv-setup .coverage .pytest_cache htmlcov
+	@rm -rf .pipenv-setup .coverage .pytest_cache htmlcov test_results
 
 
 .pipenv-setup:
