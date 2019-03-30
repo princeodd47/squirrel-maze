@@ -19,6 +19,6 @@ clean:
 	@rm -rf .pipenv-setup .coverage .pytest_cache htmlcov
 
 
-.pipenv-setup:
+.pipenv-setup: Pipfile Pipfile.lock
 	pipenv install --dev
 	@touch $@
