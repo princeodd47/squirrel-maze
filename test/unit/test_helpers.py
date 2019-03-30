@@ -66,6 +66,15 @@ class TestHelper(unittest.TestCase):
 
         assert helpers.any_members_alive(actors, 'pc') is True
 
+    def test_any_members_alive_false(self):
+        actors = []
+        actors.append(actor.Actor(max_hp=0, pc_type='pc'))
+        actors.append(actor.Actor(max_hp=0, pc_type='pc'))
+        actors.append(actor.Actor(max_hp=0, pc_type='npc'))
+
+        assert helpers.any_members_alive(actors, 'pc') is False
+        assert helpers.any_members_alive(actors, 'npc') is False
+
     def test_get_max_stat_from_actor_list(self):
         actors = []
         actors.append(actor.Actor(name='foo', level=1, max_dex=10))
