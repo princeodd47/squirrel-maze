@@ -4,14 +4,19 @@
 Goal: Using a pregenerated character, user can play through combat versus a pregenerated opponent.
 
 UI Specifics:
-    * User can start combat
-    * User can return from combat menu to main menu
-    * User can exit game from main menu
+* User can start combat
+* User can return from combat menu to main menu
+* User can exit game from main menu
 
 Combat Specifics:
-    * User can select a single option during combat
-    * Opponent will always select a single option during their turn
-    * Combat will end when one character has hp less than 0
+* User can select from a list of options during combat
+* These options are pulled per actor from a database
+* Opponent automatically selects a single option during their turn
+* Combat will end when either all friendlies or unfriendlies hp has reached 0.
 
 Mechanics Specifics:
-    * Initiative generated based on dex, then level.
+* Initiative generated based on dex, then level.
+
+Backend Specifics:
+* PC and NPC specifics are stored in TinyDB.
+* All methods should pull data from database.
