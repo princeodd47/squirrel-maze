@@ -2,7 +2,6 @@ from squirrel_maze.resources import actor as sm_actor
 from squirrel_maze.resources import action as sm_action
 from squirrel_maze.resources import helpers as sm_helpers
 from squirrel_maze.resources import menus as sm_menus
-from squirrel_maze.resources import npc as sm_npc
 
 
 class Combat:
@@ -45,7 +44,7 @@ class Combat:
     def combat_setup(self):
         raise NotImplementedError
         actors = []
-        actors.append(sm_npc.get_goblin("Fooblin"))
+        # actors.append(sm_npc.get_goblin("Fooblin"))
         char1 = sm_actor.Actor(pc_type="pc", name="Bar", level=1, max_hp=20,
                                max_str=10, max_dex=10, max_sta=10, max_wil=5)
         actors.append(char1)

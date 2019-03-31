@@ -5,10 +5,9 @@ import sys
 from art import tprint
 from PyInquirer import style_from_dict, Token, prompt
 
-from squirrel_maze.resources import actor as sm_actor
 from squirrel_maze.resources import action as sm_action
 from squirrel_maze.resources import combat as sm_combat
-from squirrel_maze.resources import npc as sm_npc
+from squirrel_maze.resources import db_helpers as sm_db_helpers
 
 
 def get_default_style():
@@ -93,9 +92,10 @@ def combat_menu():
     else:
         if answers['selection'] == 'goblin':
             actors = []
-            actors.append(sm_actor.Actor(actor_id=len(actors), name='ham', pc_type='pc', level=1, max_hp=10, max_str=10,
-                          max_dex=10, max_sta=10))
-            actors.append(sm_npc.get_big_goblin(actor_id=len(actors)))
+            db = sm_db_helpers.Database('squirrel_maze/data/db.json')
+            actors.append(db.get_actor('pcs', 'Ham', pc_type='pc', affiliation='friendly', actor_id=len(actors)))
+            actors.append(db.get_actor('npcs', 'Big Goblin', pc_type='npc', affiliation='unfriendly',
+                          actor_id=len(actors)))
             cur_battle = sm_combat.Combat(actors)
             print_battle_header(cur_battle)
             cur_battle.battle()
