@@ -2,11 +2,10 @@
 __pycache__
 *.egg-info
 build
-test_results
+artifacts
 
 # pytest files
 .coverage
-htmlcov
 
 # swap files
 *.swp
