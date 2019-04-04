@@ -37,8 +37,6 @@ jobs:
           command: |
             make test
       - store_test_results:
-          path: test_results
-
+          path: artifacts
       - store_artifacts:
-          path: htmlcov
-          destination: htmlcov
+          path: artifacts

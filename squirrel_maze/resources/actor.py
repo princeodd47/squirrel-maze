@@ -37,6 +37,8 @@ class Actor:
                     "name": [self.name],
                     "level": [self.level],
                     "hp": [str("{}/{}".format(self.cur_hp, self.max_hp))],
+                    "pc_type": [str("{}".format(self.pc_type))],
+                    "affiliation": [str("{}".format(self.affiliation))],
                     "str": [str("{}/{}".format(self.cur_str, self.max_str))],
                     "dex": [str("{}/{}".format(self.cur_dex, self.max_dex))],
                     "sta": [str("{}/{}".format(self.cur_sta, self.max_sta))],
