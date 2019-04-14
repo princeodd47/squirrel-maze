@@ -81,8 +81,8 @@ def location_menu():
     else:
         actors = []
         db = sm_db_helpers.Database('squirrel_maze/data/db.json')
-        actors.append(db.get_actor('pcs', 0, pc_type='pc', affiliation='friendly'))
-        actors.append(db.get_actor('npcs', choices[answers['selection']]['enemy_id'], pc_type='npc', affiliation='unfriendly'))
+        actors.append(db.get_actor(2, pc_type='pc', affiliation='friendly'))
+        actors.append(db.get_actor(choices[answers['selection']]['enemy_id'], pc_type='npc', affiliation='unfriendly'))
         db.close()
         print(actors)
         cur_battle = sm_combat.Combat(actors)
@@ -94,7 +94,7 @@ def get_location_menu_list():
     locations = db.get_table_contents('locations')
     location_menu_list = []
     for location in locations:
-        enemy = db.get_actor_by_id('npcs', location['npcs'])
+        enemy = db.get_actor_by_id(location['npcs'])
         location_menu_list.append({'name': f"{location['name']} - {enemy['name']}", 'value': location['id'], 'enemy_id': enemy['id']})
     db.close()
     return location_menu_list

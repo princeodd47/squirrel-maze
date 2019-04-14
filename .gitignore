@@ -6,6 +6,7 @@ artifacts
 
 # pytest files
 .coverage
+htmlcov
 
 # swap files
 *.swp

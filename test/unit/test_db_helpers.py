@@ -13,17 +13,16 @@ def db_connection():
 @pytest.mark.usefixtures("db_connection")
 def test_get_table_contents(db_connection):
     table_contents = db_connection.get_table_contents('next_index')
-    assert table_contents == [{'npcs': 3, 'pcs': 5}]
+    assert table_contents == [{'actors': 7, 'locations': 2}]
 
 
 def test_get_next_index(db_connection):
-    assert db_connection.get_next_index('npcs') == 3
-    assert db_connection.get_next_index('pcs') == 5
+    assert db_connection.get_next_index('locations') == 2
 
 
 def test_get_actor(db_connection):
-    actor = db_connection.get_actor('pcs', 0, affiliation='unfriendly')
+    actor = db_connection.get_actor(2, pc_type='pc', affiliation='friendly')
     assert actor.name == 'Ham'
     assert actor.max_hp == 10
-    assert actor.pc_type == 'npc'
-    assert actor.affiliation == 'unfriendly'
+    assert actor.pc_type == 'pc'
+    assert actor.affiliation == 'friendly'
