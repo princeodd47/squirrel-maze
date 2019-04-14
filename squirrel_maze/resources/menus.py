@@ -56,7 +56,50 @@ def main_menu():
         exit_game_menu('main')
     else:
         if answers['selection'] == 'combat':
-            combat_menu()
+            location_menu()
+            # combat_menu()
+
+
+def location_menu():
+    get_default_style()
+
+    choices = get_location_menu_list()
+    choices.append({'name': 'Return', 'value': 9999})
+
+    questions = [
+        {
+            'type': 'list',
+            'name': 'selection',
+            'message': 'Choose an opponent',
+            'choices': choices
+        }
+    ]
+
+    answers = prompt(questions)
+
+    if answers['selection'] == 9999:
+        go_to_menu('main')
+    else:
+        actors = []
+        db = sm_db_helpers.Database('squirrel_maze/data/db.json')
+        actors.append(db.get_actor(2, pc_type='pc', affiliation='friendly'))
+        actors.append(db.get_actor(choices[answers['selection']]['enemy_id'], pc_type='npc', affiliation='unfriendly'))
+        db.close()
+        cur_battle = sm_combat.Combat(actors)
+        print_battle_header(cur_battle)
+        cur_battle.battle()
+
+
+def get_location_menu_list():
+    db = sm_db_helpers.Database('squirrel_maze/data/db.json')
+    locations = db.get_table_contents('locations')
+    location_menu_list = []
+    for location in locations:
+        enemy = db.get_actor_by_id(location['npcs'])
+        location_menu_list.append({'name': f"{location['name']} - {enemy['name']}", 'value': location['id'],
+                                   'enemy_id': enemy['id']})
+    db.close()
+    return location_menu_list
 
 
 def combat_menu():
@@ -127,7 +170,6 @@ def battle_menu(active_actor, actors):
         }
     ]
 
-    # answers = prompt(questions)
     prompt(questions)
     unfriendly_target_select_menu(active_actor, actors)
 
@@ -155,7 +197,9 @@ def unfriendly_target_select_menu(active_actor, actors):
     ]
 
     answers = prompt(questions)
-    target_actor = actors[answers['selection']]
+    for actor in actors:
+        if actor.actor_id == answers['selection']:
+            target_actor = actor
     sm_action.fight(active_actor, target_actor)
 
 
