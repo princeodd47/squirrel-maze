@@ -1,5 +1,11 @@
 {
     "_default": {},
+    "next_index": {
+        "1":{
+            "npcs": 3,
+            "pcs": 5
+        }
+    },
     "npcs": {
         "1": {
             "attributes": {

@@ -7,8 +7,18 @@ class Database:
     def __init__(self, db_file):
         self.db = TinyDB(db_file)
 
+    def close(self,):
+        self.db.close()
+
     def get_table(self, table_name):
         return self.db.table(table_name)
+
+    def get_table_contents(self, table_name):
+        return self.db.table(table_name).all()
+
+    def get_next_index(self, key):
+        index_contents = self.get_table_contents('next_index')
+        return index_contents[0][key]
 
     def get_actor(self, table_name, actor_id, pc_type='npc', affiliation='friendly'):
         actor_table = self.get_table(table_name)
