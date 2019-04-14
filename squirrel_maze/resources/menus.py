@@ -59,6 +59,7 @@ def main_menu():
             location_menu()
             # combat_menu()
 
+
 def location_menu():
     get_default_style()
 
@@ -84,10 +85,10 @@ def location_menu():
         actors.append(db.get_actor(2, pc_type='pc', affiliation='friendly'))
         actors.append(db.get_actor(choices[answers['selection']]['enemy_id'], pc_type='npc', affiliation='unfriendly'))
         db.close()
-        print(actors)
         cur_battle = sm_combat.Combat(actors)
         print_battle_header(cur_battle)
         cur_battle.battle()
+
 
 def get_location_menu_list():
     db = sm_db_helpers.Database('squirrel_maze/data/db.json')
@@ -95,9 +96,11 @@ def get_location_menu_list():
     location_menu_list = []
     for location in locations:
         enemy = db.get_actor_by_id(location['npcs'])
-        location_menu_list.append({'name': f"{location['name']} - {enemy['name']}", 'value': location['id'], 'enemy_id': enemy['id']})
+        location_menu_list.append({'name': f"{location['name']} - {enemy['name']}", 'value': location['id'],
+                                   'enemy_id': enemy['id']})
     db.close()
     return location_menu_list
+
 
 def combat_menu():
     get_default_style()
@@ -167,7 +170,6 @@ def battle_menu(active_actor, actors):
         }
     ]
 
-    # answers = prompt(questions)
     prompt(questions)
     unfriendly_target_select_menu(active_actor, actors)
 
@@ -195,7 +197,9 @@ def unfriendly_target_select_menu(active_actor, actors):
     ]
 
     answers = prompt(questions)
-    target_actor = actors[answers['selection']]
+    for actor in actors:
+        if actor.actor_id == answers['selection']:
+            target_actor = actor
     sm_action.fight(active_actor, target_actor)
 
 
