@@ -86,5 +86,17 @@
             "id": 4,
             "name": "Baz"
         }
+    },
+    "locations": {
+        "1":{
+            "name": "Sweegy Forest",
+            "id": 1,
+            "npcs": 0
+        },
+        "2":{
+            "name": "Hairy Scary Woods",
+            "id": 2,
+            "npcs": 1
+        }
     }
 }
