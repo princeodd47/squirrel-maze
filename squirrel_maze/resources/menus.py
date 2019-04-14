@@ -93,9 +93,8 @@ def combat_menu():
         if answers['selection'] == 'goblin':
             actors = []
             db = sm_db_helpers.Database('squirrel_maze/data/db.json')
-            actors.append(db.get_actor('pcs', 'Ham', pc_type='pc', affiliation='friendly', actor_id=len(actors)))
-            actors.append(db.get_actor('npcs', 'Big Goblin', pc_type='npc', affiliation='unfriendly',
-                          actor_id=len(actors)))
+            actors.append(db.get_actor('pcs', 0, pc_type='pc', affiliation='friendly'))
+            actors.append(db.get_actor('npcs', 1, pc_type='npc', affiliation='unfriendly'))
             cur_battle = sm_combat.Combat(actors)
             print_battle_header(cur_battle)
             cur_battle.battle()
