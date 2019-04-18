@@ -31,11 +31,13 @@ class TestMenus():
         location_item = menus.format_location_item(mock_location, mock_actor)
         assert location_item == location_menu_list[0]
 
-    @patch('squirrel_maze.resources.menus.sm_db_helpers.Database.get_table_contents',
-           return_value=[{'name': 'Sweegy Forest', 'id': 0, 'npcs': 0}])
-    def test_get_locaion_menu_list(self, mock_contents, location_menu_list, mock_actor):
+    # @patch('squirrel_maze.resources.menus.sm_db_helpers.Database.get_table_contents',
+    #        return_value=[{'name': 'Sweegy Forest', 'id': 0, 'npcs': 0}])
+    @patch('squirrel_maze.resources.menus.sm_db_helpers')
+    def test_get_locaion_menu_list(self, mock_db_helpers, location_menu_list, mock_actor):
+        # def test_get_locaion_menu_list(self, mock_contents, location_menu_list, mock_actor):
         test_location_menu_list = menus.get_location_menu_list()
-        # test instantiation?
-        mock_contents.assert_called_with('locations')
-        # mock.db_helpers.close().assert_called_once()
-        assert test_location_menu_list == location_menu_list
+        mock_db_helpers.Database.assert_called_once()
+        # mock_db_helpers.Database.get_table_contents.assert_called_with('locations')
+        # mock_db_helpers.close.assert_called_once()
+        # assert test_location_menu_list == location_menu_list
