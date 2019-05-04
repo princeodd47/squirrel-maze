@@ -1,11 +1,5 @@
 {
     "_default": {},
-    "next_index": {
-        "1":{
-            "actors": 7,
-            "locations": 2
-        }
-    },
     "actors": {
         "1": {
             "attributes": {
@@ -86,15 +80,21 @@
         }
     },
     "locations": {
-        "1":{
-            "name": "Sweegy Forest",
+        "1": {
             "id": 0,
+            "name": "Sweegy Forest",
             "npcs": 0
         },
-        "2":{
-            "name": "Hairy Scary Woods",
+        "2": {
             "id": 1,
+            "name": "Hairy Scary Woods",
             "npcs": 1
+        }
+    },
+    "next_index": {
+        "1": {
+            "actors": 7,
+            "locations": 2
         }
     }
 }
