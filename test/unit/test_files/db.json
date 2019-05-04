@@ -1,1 +1,101 @@
-{"_default": {}, "next_index": {"1": {"actors": 7, "locations": 2}}, "actors": {"1": {"attributes": {"dex": 2, "hp": 5, "level": 1, "sta": 2, "str": 3}, "id": 0, "name": "Goblin"}, "2": {"attributes": {"dex": 9, "hp": 10, "level": 1, "sta": 9, "str": 9}, "id": 1, "name": "Big Goblin"}, "3": {"attributes": {"dex": 12, "hp": 10, "level": 1, "sta": 10, "str": 10}, "id": 2, "name": "Ham"}, "4": {"attributes": {"dex": 10, "hp": 10, "level": 1, "sta": 10, "str": 10}, "id": 3, "name": "Spam"}, "5": {"attributes": {"dex": 6, "hp": 6, "level": 1, "sta": 6, "str": 6}, "id": 4, "name": "Foo"}, "6": {"attributes": {"dex": 6, "hp": 6, "level": 3, "sta": 6, "str": 6}, "id": 5, "name": "Bar"}, "7": {"attributes": {"dex": 2, "hp": 2, "level": 1, "sta": 2, "str": 2}, "id": 6, "name": "Baz"}}, "locations": {"1": {"name": "Sweegy Forest", "id": 0, "npcs": 0}, "2": {"name": "Hairy Scary Woods", "id": 1, "npcs": 1}}, "location": {}}
+{
+    "_default": {},
+    "actors": {
+        "1": {
+            "attributes": {
+                "dex": 2,
+                "hp": 5,
+                "level": 1,
+                "sta": 2,
+                "str": 3
+            },
+            "id": 0,
+            "name": "Goblin"
+        },
+        "2": {
+            "attributes": {
+                "dex": 9,
+                "hp": 10,
+                "level": 1,
+                "sta": 9,
+                "str": 9
+            },
+            "id": 1,
+            "name": "Big Goblin"
+        },
+        "3": {
+            "attributes": {
+                "dex": 12,
+                "hp": 10,
+                "level": 1,
+                "sta": 10,
+                "str": 10
+            },
+            "id": 2,
+            "name": "Ham"
+        },
+        "4": {
+            "attributes": {
+                "dex": 10,
+                "hp": 10,
+                "level": 1,
+                "sta": 10,
+                "str": 10
+            },
+            "id": 3,
+            "name": "Spam"
+        },
+        "5": {
+            "attributes": {
+                "dex": 6,
+                "hp": 6,
+                "level": 1,
+                "sta": 6,
+                "str": 6
+            },
+            "id": 4,
+            "name": "Foo"
+        },
+        "6": {
+            "attributes": {
+                "dex": 6,
+                "hp": 6,
+                "level": 3,
+                "sta": 6,
+                "str": 6
+            },
+            "id": 5,
+            "name": "Bar"
+        },
+        "7": {
+            "attributes": {
+                "dex": 2,
+                "hp": 2,
+                "level": 1,
+                "sta": 2,
+                "str": 2
+            },
+            "id": 6,
+            "name": "Baz"
+        }
+    },
+    "location": {},
+    "locations": {
+        "1": {
+            "id": 0,
+            "name": "Sweegy Forest",
+            "npcs": 0
+        },
+        "2": {
+            "id": 1,
+            "name": "Hairy Scary Woods",
+            "npcs": 1
+        }
+    },
+    "next_index": {
+        "1": {
+            "actors": 7,
+            "locations": 2
+        }
+    }
+}
