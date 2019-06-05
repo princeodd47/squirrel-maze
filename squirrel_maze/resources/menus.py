@@ -96,10 +96,13 @@ def get_location_menu_list():
     location_menu_list = []
     for location in locations:
         enemy = db.get_actor_by_id(location['npcs'])
-        location_menu_list.append({'name': f"{location['name']} - {enemy['name']}", 'value': location['id'],
-                                   'enemy_id': enemy['id']})
+        location_menu_list.append(format_location_item(location, enemy))
     db.close()
     return location_menu_list
+
+
+def format_location_item(location, enemy):
+    return {'name': f"{location['name']} - {enemy['name']}", 'value': location['id'], 'enemy_id': enemy['id']}
 
 
 def combat_menu():
