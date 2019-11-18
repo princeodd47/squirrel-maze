@@ -1,4 +1,4 @@
-import helpers as test_helpers
+from . import helpers as test_helpers
 from squirrel_maze.resources import combat
 
 
