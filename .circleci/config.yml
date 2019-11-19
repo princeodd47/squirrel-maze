@@ -16,22 +16,19 @@ jobs:
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
       - restore_cache:
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          key: deps9-{{ .Branch }}-{{ checksum "poetry.lock" }}
       - run:
           name: install dependencies
           command: |
-            sudo pip install pipenv
-            pipenv install
+            poetry install
       - save_cache:
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          key: deps9-{{ .Branch }}-{{ checksum "poetry.lock" }}
           paths:
-            - "./venv"
-            - "/usr/local/bin"
-            - "/usr/local/lib/python3.6/site-packages"
+            - "/home/circleci/.cache/pypoetry/virtualenvs"
       - run:
-          name: Analysis
+          name: Run flake8
           command: |
-            make analysis
+            poetry run flake8 .
       - run:
           name: Tests
           command: |
