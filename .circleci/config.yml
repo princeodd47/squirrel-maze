@@ -26,9 +26,9 @@ jobs:
           paths:
             - "/home/circleci/.cache/pypoetry/virtualenvs"
       - run:
-          name: Run flake8
+          name: Analysis
           command: |
-            poetry run flake8 .
+            make analysis
       - run:
           name: Tests
           command: |
