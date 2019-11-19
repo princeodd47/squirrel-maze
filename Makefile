@@ -1,24 +1,19 @@
 PACKAGE_NAME = squirrel_maze
 PYTEST_COV = --cov=$(PACKAGE_NAME) --cov-report term-missing --cov-report html test/
 PYTEST_ARGS = -vvl --junitxml=artifacts/test_results/junit.xml $(PYTEST_COV)
-VENV = pipenv run
+VENV = poetry run
 
 .PHONY: all
 all: analysis test
 
 .PHONY: test
-test: .pipenv-setup
+test:
 	-$(VENV) pytest $(PYTEST_ARGS)
 
 .PHONY: analysis
-analysis: .pipenv-setup
+analysis:
 	$(VENV) flake8
 
 .PHONY: clean
 clean:
-	@rm -rf .pipenv-setup .coverage .pytest_cache artifacts
-
-
-.pipenv-setup: Pipfile Pipfile.lock
-	pipenv install --dev
-	@touch $@
+	@rm -rf .coverage .pytest_cache artifacts

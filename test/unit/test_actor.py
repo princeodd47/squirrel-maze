@@ -1,6 +1,6 @@
 from unittest.mock import patch, call
 
-import helpers as test_helpers
+from . import helpers as test_helpers
 from squirrel_maze.resources import actor
 
 
