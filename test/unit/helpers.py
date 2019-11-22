@@ -1,9 +1,10 @@
 from squirrel_maze.resources import actor
+from squirrel_maze.resources import weapon
 
 
 def get_single_actor():
     return actor.Actor(actor_id=0, name='ham', pc_type='pc', affiliation='friendly', level=1, max_hp=10, max_str=10,
-                       max_dex=10, max_sta=10)
+                       max_dex=10, max_sta=10, equipment={'weapon': 1, 'body': 0, 'head': 0, 'arm': 0, 'accessory': 0})
 
 
 def get_multiple_actors():
@@ -21,3 +22,7 @@ def get_multiple_actors():
     actors.append(actor.Actor(actor_id=5, name='baz', pc_type='npc', affiliation='unfriendly', level=1, max_hp=2,
                   max_str=2, max_dex=2, max_sta=2))
     return actors
+
+
+def get_single_weapon():
+    return weapon.Weapon(weapon_id=0, name="Short Sword", weapon_type=0, atk_bonus=2)

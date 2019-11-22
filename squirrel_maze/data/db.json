@@ -9,6 +9,9 @@
                 "sta": 2,
                 "str": 3
             },
+            "equipment": {
+                "weapon": 0
+            },
             "id": 0,
             "name": "Goblin"
         },
@@ -19,6 +22,9 @@
                 "level": 1,
                 "sta": 9,
                 "str": 9
+            },
+            "equipment": {
+                "weapon": 0
             },
             "id": 1,
             "name": "Big Goblin"
@@ -31,6 +37,9 @@
                 "sta": 10,
                 "str": 10
             },
+            "equipment": {
+                "weapon": 0
+            },
             "id": 2,
             "name": "Ham"
         },
@@ -41,6 +50,9 @@
                 "level": 1,
                 "sta": 10,
                 "str": 10
+            },
+            "equipment": {
+                "weapon": 0
             },
             "id": 3,
             "name": "Spam"
@@ -53,6 +65,9 @@
                 "sta": 6,
                 "str": 6
             },
+            "equipment": {
+                "weapon": 0
+            },
             "id": 4,
             "name": "Foo"
         },
@@ -64,6 +79,9 @@
                 "sta": 6,
                 "str": 6
             },
+            "equipment": {
+                "weapon": 0
+            },
             "id": 5,
             "name": "Bar"
         },
@@ -74,6 +92,9 @@
                 "level": 1,
                 "sta": 2,
                 "str": 2
+            },
+            "equipment": {
+                "weapon": 0
             },
             "id": 6,
             "name": "Baz"
@@ -94,7 +115,39 @@
     "next_index": {
         "1": {
             "actors": 7,
-            "locations": 2
+            "locations": 2,
+            "equipment": 3,
+            "equipment_types": 2
+        }
+    },
+    "equipment": {
+        "1": {
+            "id": 0,
+            "type": 0,
+            "name": "None",
+            "atk_bonus": 0
+        },
+        "2": {
+            "id": 1,
+            "type": 1,
+            "name": "Short Sword",
+            "atk_bonus": 2
+        },
+        "3": {
+            "id": 2,
+            "type": 1,
+            "name": "Fire Sword",
+            "atk_bonus": 2
+        }
+    },
+    "equipment_types": {
+        "1": {
+            "id": 0,
+            "name": "none"
+        },
+        "2": {
+            "id": 1,
+            "name": "sword"
         }
     }
 }

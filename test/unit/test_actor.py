@@ -10,6 +10,11 @@ def test_initialize():
     assert isinstance(actor_ham, actor.Actor) is True
     assert actor_ham.name == "ham"
     assert actor_ham.affiliation == "friendly"
+    assert actor_ham.equipment['weapon'] == 1
+    assert actor_ham.equipment['body'] == 0
+    assert actor_ham.equipment['arm'] == 0
+    assert actor_ham.equipment['head'] == 0
+    assert actor_ham.equipment['accessory'] == 0
 
 
 def test_set_stats():
@@ -76,7 +81,7 @@ def test_restore_all_stats_to_max(mock_restore):
 def test_get_atk_value(mock_rand):
     actor_ham = test_helpers.get_single_actor()
     atk_val = actor_ham.get_atk_value()
-    assert atk_val == 26
+    assert atk_val == 27
 
 
 @patch('squirrel_maze.resources.actor.helpers.random.randint', return_value=6, autospec=True)
@@ -106,3 +111,18 @@ def test_get_unfriendly_actors():
     assert (
             all([x.affiliation != actor_ham.affiliation for x in unfriendlies])
     ) is True
+
+
+def test_update_equipment():
+    actor_ham = test_helpers.get_single_actor()
+    actor_ham.update_equipment({'weapon': 1, 'body': 1})
+    assert actor_ham.equipment['weapon'] == 1
+    assert actor_ham.equipment['body'] == 1
+    assert actor_ham.equipment['arm'] == 0
+    assert actor_ham.equipment['head'] == 0
+    assert actor_ham.equipment['accessory'] == 0
+
+
+def test_get_weapon():
+    actor_ham = test_helpers.get_single_actor()
+    assert actor_ham.equipment['weapon'] == 1

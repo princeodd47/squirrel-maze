@@ -13,7 +13,7 @@ def db_connection():
 @pytest.mark.usefixtures("db_connection")
 def test_get_table_contents(db_connection):
     table_contents = db_connection.get_table_contents('next_index')
-    assert table_contents == [{'actors': 7, 'locations': 2}]
+    assert table_contents == [{'actors': 7, 'equipment': 3, 'equipment_types': 2, 'locations': 2}]
 
 
 def test_get_next_index(db_connection):
