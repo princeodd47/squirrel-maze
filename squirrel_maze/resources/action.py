@@ -41,3 +41,11 @@ def fire_punch(source, target):
         {"element": "none", "damage": helpers.get_rand_val(1, 10)}
     )
     return dmg
+
+
+def do_nothing():
+    pass
+
+
+def stun(source, target):
+    pass

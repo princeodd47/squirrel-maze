@@ -2,10 +2,18 @@ from tabulate import tabulate
 
 from squirrel_maze.resources import helpers
 
+EQUIPMENT_DEFAULTS = {
+    'weapon': 0,
+    'body': 0,
+    'head': 0,
+    'arm': 0,
+    'accessory': 0
+}
+
 
 class Actor:
     def __init__(self, actor_id=0, pc_type="npc", affiliation="friendly", name="unknown", level=0, max_hp=0,
-                 max_str=0, max_dex=0, max_sta=0, max_wil=0):
+                 max_str=0, max_dex=0, max_sta=0, max_wil=0, equipment=EQUIPMENT_DEFAULTS):
         self.actor_id = actor_id
         self.pc_type = pc_type
         self.affiliation = affiliation
@@ -17,6 +25,22 @@ class Actor:
         self.max_crit_fail_chance = 1
         self.cur_crit_fail_chance = 1
         self.set_stats(max_hp, max_str, max_dex, max_sta, max_wil)
+        self.set_equipment(equipment)
+
+    def set_equipment(self, equipment):
+        self.equipment = {
+            'weapon': equipment['weapon'],
+            'body': equipment['body'],
+            'head': equipment['head'],
+            'arm': equipment['arm'],
+            'accessory': equipment['accessory']
+        }
+
+    def update_equipment(self, equipment):
+        self.equipment.update(equipment)
+
+    def get_weapon(self):
+        return self.equipment['weapon']
 
     def set_stats(self, max_hp, max_str, max_dex, max_sta, max_wil):
         self.max_hp = max_hp
@@ -78,7 +102,7 @@ class Actor:
         elif helpers.is_critical_fail(atk_rand, self.cur_crit_fail_chance):
             atk_rand += helpers.get_crit_fail_bonus()
         atk_base = self.cur_str + self.cur_dex
-        atk_total = atk_base + atk_rand
+        atk_total = atk_base + atk_rand + self.get_weapon_bonus()
         if atk_total < 0:
             atk_total = 0
         return atk_total
@@ -103,3 +127,6 @@ class Actor:
             if self.affiliation != actor.affiliation:
                 friendlies.append(actor)
         return friendlies
+
+    def get_weapon_bonus(self):
+        return self.equipment['weapon']
