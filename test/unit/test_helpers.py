@@ -55,28 +55,32 @@ def test_get_stat_list():
 
 
 def test_calc_magic_defense():
-    source_actor = actor.Actor(level=10, max_wil=5)
-    target_actor = actor.Actor(level=10, max_wil=8)
+    source_actor = actor.Actor(stats={'level': 10, 'max_str': 0, 'max_dex': 0, 'max_sta': 0, 'max_wil': 5, 'max_hp': 0})
+    target_actor = actor.Actor(stats={'level': 10, 'max_str': 0, 'max_dex': 0, 'max_sta': 0, 'max_wil': 8, 'max_hp': 0})
 
-    md = helpers.calc_magic_defense(source_actor, target_actor)
-
-    assert md == -3
+    assert helpers.calc_magic_defense(source_actor, target_actor) == -3
 
 
 def test_any_members_alive():
     actors = []
-    actors.append(actor.Actor(max_hp=10, pc_type='pc'))
-    actors.append(actor.Actor(max_hp=0, pc_type='pc'))
-    actors.append(actor.Actor(max_hp=0, pc_type='npc'))
+    actors.append(actor.Actor(stats={'level': 10, 'max_str': 0, 'max_dex': 0, 'max_sta': 0, 'max_wil': 5, 'max_hp': 10},
+                  pc_type='pc'))
+    actors.append(actor.Actor(stats={'level': 10, 'max_str': 0, 'max_dex': 0, 'max_sta': 0, 'max_wil': 5, 'max_hp': 0},
+                  pc_type='pc'))
+    actors.append(actor.Actor(stats={'level': 10, 'max_str': 0, 'max_dex': 0, 'max_sta': 0, 'max_wil': 5, 'max_hp': 0},
+                  pc_type='npc'))
 
     assert helpers.any_members_alive(actors, 'pc') is True
 
 
 def test_any_members_alive_false():
     actors = []
-    actors.append(actor.Actor(max_hp=0, pc_type='pc'))
-    actors.append(actor.Actor(max_hp=0, pc_type='pc'))
-    actors.append(actor.Actor(max_hp=0, pc_type='npc'))
+    actors.append(actor.Actor(stats={'level': 10, 'max_str': 0, 'max_dex': 0, 'max_sta': 0, 'max_wil': 5, 'max_hp': 0},
+                  pc_type='pc'))
+    actors.append(actor.Actor(stats={'level': 10, 'max_str': 0, 'max_dex': 0, 'max_sta': 0, 'max_wil': 5, 'max_hp': 0},
+                  pc_type='pc'))
+    actors.append(actor.Actor(stats={'level': 10, 'max_str': 0, 'max_dex': 0, 'max_sta': 0, 'max_wil': 5, 'max_hp': 0},
+                  pc_type='npc'))
 
     assert helpers.any_members_alive(actors, 'pc') is False
     assert helpers.any_members_alive(actors, 'npc') is False
@@ -84,20 +88,22 @@ def test_any_members_alive_false():
 
 def test_get_max_stat_from_actor_list():
     actors = []
-    actors.append(actor.Actor(name='foo', level=1, max_dex=10))
-    actors.append(actor.Actor(name='bar', level=2, max_dex=5))
-    actors.append(actor.Actor(name='baz', level=1, max_dex=15))
+    actors.append(actor.Actor(stats={'level': 10, 'max_str': 0, 'max_dex': 10, 'max_sta': 0, 'max_wil': 5, 'max_hp': 0},
+                  pc_type='pc', name='foo'))
+    actors.append(actor.Actor(stats={'level': 10, 'max_str': 0, 'max_dex': 5, 'max_sta': 0, 'max_wil': 5, 'max_hp': 0},
+                  pc_type='pc', name='bar'))
+    actors.append(actor.Actor(stats={'level': 10, 'max_str': 0, 'max_dex': 15, 'max_sta': 0, 'max_wil': 5, 'max_hp': 0},
+                  pc_type='pc', name='bar'))
 
-    max_val = helpers.get_max_stat_from_actor_list(actors, 'cur_dex')
-    assert max_val == 15
+    assert helpers.get_max_stat_from_actor_list(actors, 'cur_dex') == 15
 
 
 def test_get_actor_list_by_stat():
     actors = []
-    actors.append(actor.Actor(name='foo', level=1, max_dex=10))
-    actors.append(actor.Actor(name='bar', level=2, max_dex=5))
-    actors.append(actor.Actor(name='baz', level=3, max_dex=15))
-    actors.append(actor.Actor(name='ham', level=1, max_dex=15))
+    actors.append(actor.Actor(name='foo', stats={'level': 1, 'max_dex': 10}))
+    actors.append(actor.Actor(name='bar', stats={'level': 2, 'max_dex': 5}))
+    actors.append(actor.Actor(name='baz', stats={'level': 3, 'max_dex': 15}))
+    actors.append(actor.Actor(name='ham', stats={'level': 1, 'max_dex': 15}))
 
     sorted_actors = helpers.get_actor_list_by_stat(actors, 'cur_dex', 'level')
 

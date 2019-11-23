@@ -22,9 +22,9 @@ class Database:
 
     def get_actor(self, actor_id, pc_type='npc', affiliation='friendly'):
         db_actor = self.get_actor_by_id(actor_id)
-        return sm_actor.Actor(name=db_actor['name'], level=db_actor['attributes']['level'],
-                              max_str=db_actor['attributes']['str'], max_dex=db_actor['attributes']['dex'],
-                              max_sta=db_actor['attributes']['sta'], max_hp=db_actor['attributes']['hp'],
+        return sm_actor.Actor(name=db_actor['name'], stats={'level': db_actor['attributes']['level'],
+                              'max_str': db_actor['attributes']['str'], 'max_dex': db_actor['attributes']['dex'],
+                              'max_sta': db_actor['attributes']['sta'], 'max_hp': db_actor['attributes']['hp']},
                               pc_type=pc_type, affiliation=affiliation, actor_id=actor_id)
 
     def get_actor_by_id(self, actor_id):

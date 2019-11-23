@@ -8,7 +8,7 @@ from squirrel_maze.resources import actor
 @patch('squirrel_maze.resources.actor.Actor.get_def_value', return_value=15, autospec=True)
 def test_fight(mock_atk, mock_def):
     source_actor = actor.Actor()
-    target_actor = actor.Actor(max_hp=20)
+    target_actor = actor.Actor(stats={'max_hp': 20})
     action.fight(source_actor, target_actor)
     assert target_actor.cur_hp == 11
 
@@ -17,7 +17,7 @@ def test_fight(mock_atk, mock_def):
 @patch('squirrel_maze.resources.actor.Actor.get_def_value', return_value=15, autospec=True)
 def test_fight_min_damage(mock_atk, mock_def):
     source_actor = actor.Actor()
-    target_actor = actor.Actor(max_hp=20)
+    target_actor = actor.Actor(stats={'max_hp': 20})
     action.fight(source_actor, target_actor)
     assert target_actor.cur_hp == 19
 
@@ -25,7 +25,7 @@ def test_fight_min_damage(mock_atk, mock_def):
 @patch('squirrel_maze.resources.action.fight')
 def test_fight_all(mock_fight):
     source_actor = actor.Actor()
-    target = actor.Actor(max_hp=20)
+    target = actor.Actor(stats={'max_hp': 20})
     targets = [
         target,
         target,
@@ -42,8 +42,8 @@ def test_fight_all(mock_fight):
 @patch('squirrel_maze.resources.action.helpers.random.randint', return_value=2, autospec=True)
 @patch('squirrel_maze.resources.action.helpers.calc_magic_defense', return_value=-1, autospec=True)
 def test_fire_bolt(mock_rand, mock_md):
-    source_actor = actor.Actor(level=10, max_wil=5)
-    target_actor = actor.Actor(level=10, max_wil=6)
+    source_actor = actor.Actor(level=10, stats={'max_wil': 5})
+    target_actor = actor.Actor(level=10, stats={'max_wil': 6})
 
     dmg = action.fire_bolt(source_actor, target_actor)
     assert dmg[0]['element'] == "fire"
