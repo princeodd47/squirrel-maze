@@ -10,22 +10,40 @@ EQUIPMENT_DEFAULTS = {
     'accessory': 0
 }
 
+STAT_DEFAULTS = {
+        'max_str': 10,
+        'max_dex': 10,
+        'max_sta': 10,
+        'max_wil': 10,
+        'max_hp': 10
+}
+
 
 class Actor:
-    def __init__(self, actor_id=0, pc_type="npc", affiliation="friendly", name="unknown", level=0, max_hp=0,
-                 max_str=0, max_dex=0, max_sta=0, max_wil=0, equipment=EQUIPMENT_DEFAULTS):
+    def __init__(self, actor_id=0, level=1, pc_type="npc", affiliation="friendly", name="unknown", stats=STAT_DEFAULTS,
+                 equipment=EQUIPMENT_DEFAULTS):
+        self.initialize_stats()
+        self.set_stats(stats)
+        self.max_crit_hit_chance = 10
+        self.max_crit_fail_chance = 1
+        self.restore_all_stats_to_max()
+
         self.actor_id = actor_id
         self.pc_type = pc_type
         self.affiliation = affiliation
         self.name = name
         self.level = level
         self.status = "normal"
-        self.max_crit_hit_chance = 10
-        self.cur_crit_hit_chance = 10
-        self.max_crit_fail_chance = 1
-        self.cur_crit_fail_chance = 1
-        self.set_stats(max_hp, max_str, max_dex, max_sta, max_wil)
         self.set_equipment(equipment)
+
+    def initialize_stats(self):
+        self.max_hp = 0
+        self.max_str = 0
+        self.max_dex = 0
+        self.max_sta = 0
+        self.max_wil = 0
+        self.max_crit_hit_chance = 10
+        self.max_crit_fail_chance = 1
 
     def set_equipment(self, equipment):
         self.equipment = {
@@ -42,17 +60,27 @@ class Actor:
     def get_weapon(self):
         return self.equipment['weapon']
 
-    def set_stats(self, max_hp, max_str, max_dex, max_sta, max_wil):
-        self.max_hp = max_hp
-        self.max_str = max_str
-        self.max_dex = max_dex
-        self.max_sta = max_sta
-        self.max_wil = max_wil
-        self.cur_hp = max_hp
-        self.cur_str = max_str
-        self.cur_dex = max_dex
-        self.cur_sta = max_sta
-        self.cur_wil = max_wil
+    def set_stats(self, stats):
+        if 'max_hp' in stats.keys():
+            self.max_hp = stats['max_hp']
+        else:
+            self.max_hp = 10
+        if 'max_str' in stats.keys():
+            self.max_str = stats['max_str']
+        else:
+            self.max_str = 10
+        if 'max_dex' in stats.keys():
+            self.max_dex = stats['max_dex']
+        else:
+            self.max_dex = 10
+        if 'max_sta' in stats.keys():
+            self.max_sta = stats['max_sta']
+        else:
+            self.max_sta = 10
+        if 'max_wil' in stats.keys():
+            self.max_wil = stats['max_wil']
+        else:
+            self.max_wil = 10
 
     def print_char_sheet(self):
         print(
@@ -77,6 +105,9 @@ class Actor:
 
     def modify_stat(self, stat, value):
         self.__setattr__(stat, self.__getattribute__(stat) + value)
+
+    def set_stat(self, stat, value):
+        self.__setattr__(stat, self.__getattribute__(stat))
 
     def change_attribute(self, stat, value):
         self.__setattr__(stat, value)

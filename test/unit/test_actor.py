@@ -20,13 +20,21 @@ def test_initialize():
 def test_set_stats():
     actor_ham = test_helpers.get_single_actor()
 
-    actor_ham.set_stats(1, 2, 3, 4, 5)
+    test_stats = {
+        'max_hp': 1,
+        'max_str': 2,
+        'max_dex': 3,
+        'max_sta': 4,
+        'max_wil': 5
+    }
+    actor_ham.set_stats(test_stats)
 
     assert actor_ham.max_hp == 1
     assert actor_ham.max_str == 2
     assert actor_ham.max_dex == 3
     assert actor_ham.max_sta == 4
     assert actor_ham.max_wil == 5
+    assert actor_ham.level == 1
 
 
 def test_modify_stat():
@@ -80,15 +88,13 @@ def test_restore_all_stats_to_max(mock_restore):
 @patch('squirrel_maze.resources.actor.helpers.random.randint', return_value=6, autospec=True)
 def test_get_atk_value(mock_rand):
     actor_ham = test_helpers.get_single_actor()
-    atk_val = actor_ham.get_atk_value()
-    assert atk_val == 27
+    assert actor_ham.get_atk_value() == 27
 
 
 @patch('squirrel_maze.resources.actor.helpers.random.randint', return_value=6, autospec=True)
 def test_get_def_value(mock_rand):
     actor_ham = test_helpers.get_single_actor()
-    atk_val = actor_ham.get_def_value()
-    assert atk_val == 26
+    assert actor_ham.get_def_value() == 26
 
 
 def test_get_friendly_actors():
