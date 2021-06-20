@@ -1,3 +1,6 @@
+from typing import List
+
+from squirrel_maze.resources.actor import Actor
 from squirrel_maze.resources import actor as sm_actor
 from squirrel_maze.resources import action as sm_action
 from squirrel_maze.resources import helpers as sm_helpers
@@ -5,7 +8,7 @@ from squirrel_maze.resources import menus as sm_menus
 
 
 class Combat:
-    def __init__(self, actors):
+    def __init__(self, actors: List[Actor]):
         self.actors = actors
         self.get_teams()
         self.round = 0
@@ -34,7 +37,7 @@ class Combat:
             self.pc_battle_turn()
 
     def npc_battle_turn(self):
-        unfriendlies = self.active_actor.get_unfriendly_actors(self.actors)
+        unfriendlies = sm_helpers.get_affiliated_actors("unfriendly", self.actors)
         target_actor = unfriendlies[0]
         sm_action.fight(self.active_actor, target_actor)
 

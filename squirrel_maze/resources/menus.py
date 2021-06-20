@@ -1,12 +1,15 @@
 from __future__ import print_function, unicode_literals
 
 import sys
+from typing import List
 
 from art import tprint
 from PyInquirer import style_from_dict, Token, prompt
 
+from squirrel_maze.resources.actor import Actor
 from squirrel_maze.resources import action as sm_action
 from squirrel_maze.resources import combat as sm_combat
+from squirrel_maze.resources import helpers as sm_helpers
 from squirrel_maze.resources import db_helpers as sm_db_helpers
 
 
@@ -101,7 +104,7 @@ def get_location_menu_list():
     return location_menu_list
 
 
-def format_location_item(location, enemy):
+def format_location_item(location: dict, enemy: dict) -> dict:
     return {'name': f"{location['name']} - {enemy['name']}", 'value': location['id'], 'enemy_id': enemy['id']}
 
 
@@ -153,7 +156,7 @@ def print_battle_header(battle):
         print("Team: {}: {}".format(team, battle.teams[team]))
 
 
-def battle_menu(active_actor, actors):
+def battle_menu(active_actor: Actor, actors: List[Actor]):
     get_default_style()
 
     choices = [
@@ -177,11 +180,11 @@ def battle_menu(active_actor, actors):
     unfriendly_target_select_menu(active_actor, actors)
 
 
-def unfriendly_target_select_menu(active_actor, actors):
+def unfriendly_target_select_menu(active_actor: Actor, actors: List[Actor]):
     get_default_style()
     choices = []
 
-    for actor in active_actor.get_unfriendly_actors(actors):
+    for actor in sm_helpers.get_affiliated_actors("unfriendly", actors):
         choices.append(
             {
                 'key': actor.actor_id,
@@ -206,7 +209,7 @@ def unfriendly_target_select_menu(active_actor, actors):
     sm_action.fight(active_actor, target_actor)
 
 
-def exit_game_menu(prev_menu):
+def exit_game_menu(prev_menu: str):
     get_default_style()
 
     choices = [
@@ -230,7 +233,7 @@ def exit_game_menu(prev_menu):
         go_to_menu(prev_menu)
 
 
-def go_to_menu(menu_name):
+def go_to_menu(menu_name: str):
     if menu_name == 'main':
         main_menu()
     elif menu_name == 'combat':

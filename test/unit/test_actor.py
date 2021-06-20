@@ -97,28 +97,6 @@ def test_get_def_value(mock_rand):
     assert actor_ham.get_def_value() == 26
 
 
-def test_get_friendly_actors():
-    actor_ham = test_helpers.get_single_actor()
-    actors = test_helpers.get_multiple_actors()
-
-    friendlies = actor_ham.get_friendly_actors(actors)
-    assert len(friendlies) == 4
-    assert (
-            all([x.affiliation == 'friendly' for x in friendlies])
-    ) is True
-
-
-def test_get_unfriendly_actors():
-    actor_ham = test_helpers.get_single_actor()
-    actors = test_helpers.get_multiple_actors()
-
-    unfriendlies = actor_ham.get_unfriendly_actors(actors)
-    assert len(unfriendlies) == 2
-    assert (
-            all([x.affiliation != actor_ham.affiliation for x in unfriendlies])
-    ) is True
-
-
 def test_update_equipment():
     actor_ham = test_helpers.get_single_actor()
     actor_ham.update_equipment({'weapon': 1, 'body': 1})

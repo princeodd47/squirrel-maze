@@ -1,7 +1,9 @@
+import pytest
 from unittest.mock import patch
 
-from squirrel_maze.resources import helpers
 from squirrel_maze.resources import actor
+from squirrel_maze.resources import helpers
+from . import helpers as test_helpers
 
 
 @patch('squirrel_maze.resources.helpers.random.randint', return_value=6, autospec=True)
@@ -108,3 +110,14 @@ def test_get_actor_list_by_stat():
     sorted_actors = helpers.get_actor_list_by_stat(actors, 'cur_dex', 'level')
 
     assert sorted_actors[0].name == 'baz'
+
+@pytest.mark.parametrize('affiliation, expected_count', [('friendly', 4),('unfriendly', 2)])
+def test_get_friendly_actors(affiliation, expected_count):
+    actor_ham = test_helpers.get_single_actor()
+    actors = test_helpers.get_multiple_actors()
+
+    affiliation_count = helpers.get_affiliated_actors(affiliation, actors)
+    assert len(affiliation_count) == expected_count
+    assert (
+            all([x.affiliation == affiliation for x in affiliation_count])
+    ) is True

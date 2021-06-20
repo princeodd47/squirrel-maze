@@ -20,14 +20,8 @@ STAT_DEFAULTS = {
 
 
 class Actor:
-    def __init__(self, actor_id=0, level=1, pc_type="npc", affiliation="friendly", name="unknown", stats=STAT_DEFAULTS,
-                 equipment=EQUIPMENT_DEFAULTS):
-        self.initialize_stats()
-        self.set_stats(stats)
-        self.max_crit_hit_chance = 10
-        self.max_crit_fail_chance = 1
-        self.restore_all_stats_to_max()
-
+    def __init__(self, actor_id:int=0, level:int=1, pc_type:str="npc", affiliation:str="friendly", name:str="unknown", stats:dict=STAT_DEFAULTS,
+            equipment:dict=EQUIPMENT_DEFAULTS):
         self.actor_id = actor_id
         self.pc_type = pc_type
         self.affiliation = affiliation
@@ -36,7 +30,12 @@ class Actor:
         self.status = "normal"
         self.set_equipment(equipment)
 
-    def initialize_stats(self):
+        self._initialize_stats()
+        self.set_stats(stats)
+        self.restore_all_stats_to_max()
+
+
+    def _initialize_stats(self):
         self.max_hp = 0
         self.max_str = 0
         self.max_dex = 0
@@ -44,8 +43,15 @@ class Actor:
         self.max_wil = 0
         self.max_crit_hit_chance = 10
         self.max_crit_fail_chance = 1
+        self.cur_hp = 0
+        self.cur_str = 0
+        self.cur_dex = 0
+        self.cur_sta = 0
+        self.cur_wil = 0
+        self.cur_crit_hit_chance = 10
+        self.cur_crit_fail_chance = 1
 
-    def set_equipment(self, equipment):
+    def set_equipment(self, equipment:dict):
         self.equipment = {
             'weapon': equipment['weapon'],
             'body': equipment['body'],
@@ -54,13 +60,13 @@ class Actor:
             'accessory': equipment['accessory']
         }
 
-    def update_equipment(self, equipment):
+    def update_equipment(self, equipment:dict):
         self.equipment.update(equipment)
 
     def get_weapon(self):
         return self.equipment['weapon']
 
-    def set_stats(self, stats):
+    def set_stats(self, stats:dict):
         if 'max_hp' in stats.keys():
             self.max_hp = stats['max_hp']
         else:
@@ -103,13 +109,13 @@ class Actor:
             )
         )
 
-    def modify_stat(self, stat, value):
+    def modify_stat(self, stat:str, value:int):
         self.__setattr__(stat, self.__getattribute__(stat) + value)
 
-    def set_stat(self, stat, value):
+    def set_stat(self, stat:str, value:int):
         self.__setattr__(stat, self.__getattribute__(stat))
 
-    def change_attribute(self, stat, value):
+    def change_attribute(self, stat:str, value:int):
         self.__setattr__(stat, value)
 
     def get_sta_reduction(self):
@@ -118,7 +124,7 @@ class Actor:
     def get_crit_modifier(self):
         raise "not implemented"
 
-    def restore_stat_to_max(self, stat):
+    def restore_stat_to_max(self, stat:str):
         self.__setattr__("cur_{}".format(stat), self.__getattribute__("max_{}".format(stat)))
 
     def restore_all_stats_to_max(self):
@@ -126,7 +132,7 @@ class Actor:
         for stat in stats:
             self.restore_stat_to_max(stat)
 
-    def get_atk_value(self):
+    def get_atk_value(self) -> int:
         atk_rand = helpers.get_rand_val(1, 10)
         if helpers.is_critical_hit(atk_rand, self.cur_crit_hit_chance):
             atk_rand += helpers.get_crit_hit_bonus()
@@ -138,26 +144,12 @@ class Actor:
             atk_total = 0
         return atk_total
 
-    def get_def_value(self):
+    def get_def_value(self) -> int:
         def_rand = helpers.get_rand_val(1, 10)
         def_total = self.cur_sta + self.cur_dex + def_rand
         if def_total < 0:
             def_total = 0
         return def_total
 
-    def get_friendly_actors(self, actors):
-        friendlies = []
-        for actor in actors:
-            if self.affiliation == actor.affiliation:
-                friendlies.append(actor)
-        return friendlies
-
-    def get_unfriendly_actors(self, actors):
-        friendlies = []
-        for actor in actors:
-            if self.affiliation != actor.affiliation:
-                friendlies.append(actor)
-        return friendlies
-
-    def get_weapon_bonus(self):
+    def get_weapon_bonus(self) -> int:
         return self.equipment['weapon']

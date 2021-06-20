@@ -1,7 +1,10 @@
+from typing import List
 from squirrel_maze.resources import helpers
+from squirrel_maze.resources.actor import Actor
 
 
-def fight(source, target):
+def fight(source:Actor, target:Actor):
+    """Physical attack between actors. Target actor's hp is reduced by damage dealt."""
     src_atk_total = source.get_atk_value()
     tar_def_total = target.get_def_value()
 
@@ -17,12 +20,13 @@ def fight(source, target):
     target.cur_hp -= dmg
 
 
-def fight_all(source, targets):
+def fight_all(source: Actor, targets: List[Actor]):
+    """Physical attack against multiple actors. Target actors' hp is reduced by damage dealt."""
     for target in targets:
         fight(source, target)
 
 
-def fire_bolt(source, target):
+def fire_bolt(source: Actor, target: Actor):
     dmg_val = helpers.get_rand_val(1, 2) + source.level + (source.cur_wil - target.cur_wil)
     dmg = []
     dmg.append(
@@ -31,8 +35,7 @@ def fire_bolt(source, target):
     return dmg
 
 
-def fire_punch(source, target):
-    raise "not implemented"
+def fire_punch(source: Actor, target: Actor):
     dmg = []
     dmg.append(
         {"element": "fire", "damage": helpers.get_rand_val(1, 2) + source.level}
@@ -47,5 +50,5 @@ def do_nothing():
     pass
 
 
-def stun(source, target):
+def stun(source: Actor, target: Actor):
     pass
