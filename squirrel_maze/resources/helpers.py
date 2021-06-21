@@ -1,8 +1,6 @@
 import random
 from typing import List
 
-# from squirrel_maze.resources.actor import Actor
-
 
 def get_rand_val(min_val: int, max_val: int) -> int:
     return random.randint(min_val, max_val)
@@ -37,27 +35,27 @@ def get_stat_list() -> List[str]:
     return stats
 
 
-def calc_magic_defense(source, target) -> int:
+def calc_magic_defense(source, target) -> int: # type: ignore
     return source.cur_wil - target.cur_wil
 
 
-def any_members_alive(actors, pc_type: str) -> bool:
+def any_members_alive(actors, pc_type: str) -> bool: # type: ignore
     for actor in actors:
         if actor.pc_type == pc_type and actor.cur_hp > 0:
             return True
     return False
 
 
-def get_actor_list_by_stat(actors, stat_primary: str, stat_secondary: str):
+def get_actor_list_by_stat(actors, stat_primary: str, stat_secondary: str): # type: ignore
     sorted_actors = sorted(actors, key=lambda actor: (getattr(actor, stat_primary), getattr(actor, stat_secondary)),
                            reverse=True)
     return sorted_actors
 
 
-def get_max_stat_from_actor_list(actors, stat: str) -> int:
+def get_max_stat_from_actor_list(actors, stat: str) -> int: # type: ignore
     max_val = max(getattr(actor, stat) for actor in actors)
     return max_val
 
 
-def get_affiliated_actors(affiliation: str, compared_actors):
+def get_affiliated_actors(affiliation: str, compared_actors): # type: ignore
     return [actor for actor in compared_actors if affiliation == actor.affiliation]

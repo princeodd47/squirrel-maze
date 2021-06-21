@@ -30,6 +30,10 @@ jobs:
           command: |
             make analysis
       - run:
+          name: Lint
+          command: |
+            make check
+      - run:
           name: Tests
           command: |
             make test

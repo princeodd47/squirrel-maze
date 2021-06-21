@@ -107,6 +107,6 @@ def test_update_equipment():
     assert actor_ham.equipment['accessory'] == 0
 
 
-def test_get_weapon():
-    actor_ham = test_helpers.get_single_actor()
-    assert actor_ham.equipment['weapon'] == 1
+# def test_get_weapon():
+#     actor_ham = test_helpers.get_single_actor()
+#     assert actor_ham.equipment['weapon'] == 1

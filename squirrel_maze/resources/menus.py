@@ -1,7 +1,7 @@
 from __future__ import print_function, unicode_literals
 
 import sys
-from typing import List
+from typing import List, Type
 
 from art import tprint
 from PyInquirer import style_from_dict, Token, prompt
@@ -13,7 +13,7 @@ from squirrel_maze.resources import helpers as sm_helpers
 from squirrel_maze.resources import db_helpers as sm_db_helpers
 
 
-def get_default_style():
+def get_default_style(): # type:ignore
     style = style_from_dict({
         Token.Separator: '#cc5454',
         Token.QuestionMark: '#673ab7 bold',
@@ -26,7 +26,7 @@ def get_default_style():
     return style
 
 
-def main_menu():
+def main_menu() -> None:
     tprint('squirrel_maze')
     get_default_style()
 
@@ -63,7 +63,7 @@ def main_menu():
             # combat_menu()
 
 
-def location_menu():
+def location_menu() -> None:
     get_default_style()
 
     choices = get_location_menu_list()
@@ -93,7 +93,7 @@ def location_menu():
         cur_battle.battle()
 
 
-def get_location_menu_list():
+def get_location_menu_list() -> List:
     db = sm_db_helpers.Database('squirrel_maze/data/db.json')
     locations = db.get_table_contents('locations')
     location_menu_list = []
@@ -108,7 +108,7 @@ def format_location_item(location: dict, enemy: dict) -> dict:
     return {'name': f"{location['name']} - {enemy['name']}", 'value': location['id'], 'enemy_id': enemy['id']}
 
 
-def combat_menu():
+def combat_menu() -> None:
     get_default_style()
 
     choices = [
@@ -139,24 +139,25 @@ def combat_menu():
     elif answers['selection'] == 'return':
         go_to_menu('main')
     else:
+        # is this even used?
         if answers['selection'] == 'goblin':
             actors = []
             db = sm_db_helpers.Database('squirrel_maze/data/db.json')
-            actors.append(db.get_actor('pcs', 0, pc_type='pc', affiliation='friendly'))
-            actors.append(db.get_actor('npcs', 1, pc_type='npc', affiliation='unfriendly'))
+            actors.append(db.get_actor(0, pc_type='pc', affiliation='friendly'))
+            actors.append(db.get_actor(1, pc_type='npc', affiliation='unfriendly'))
             db.close()
             cur_battle = sm_combat.Combat(actors)
             print_battle_header(cur_battle)
             cur_battle.battle()
 
 
-def print_battle_header(battle):
+def print_battle_header(battle) -> None: # type:ignore
     print('Battle between:')
     for team in battle.teams:
         print("Team: {}: {}".format(team, battle.teams[team]))
 
 
-def battle_menu(active_actor: Actor, actors: List[Actor]):
+def battle_menu(active_actor: Actor, actors: List[Actor]) -> None:
     get_default_style()
 
     choices = [
@@ -180,7 +181,7 @@ def battle_menu(active_actor: Actor, actors: List[Actor]):
     unfriendly_target_select_menu(active_actor, actors)
 
 
-def unfriendly_target_select_menu(active_actor: Actor, actors: List[Actor]):
+def unfriendly_target_select_menu(active_actor: Actor, actors: List[Actor]): # type: ignore
     get_default_style()
     choices = []
 
@@ -209,7 +210,7 @@ def unfriendly_target_select_menu(active_actor: Actor, actors: List[Actor]):
     sm_action.fight(active_actor, target_actor)
 
 
-def exit_game_menu(prev_menu: str):
+def exit_game_menu(prev_menu: str) -> None:
     get_default_style()
 
     choices = [
@@ -233,18 +234,18 @@ def exit_game_menu(prev_menu: str):
         go_to_menu(prev_menu)
 
 
-def go_to_menu(menu_name: str):
+def go_to_menu(menu_name: str) -> None:
     if menu_name == 'main':
         main_menu()
     elif menu_name == 'combat':
         combat_menu()
 
 
-def victory():
+def victory() -> None:
     print("Congratulations, you win!")
     go_to_menu('main')
 
 
-def defeat():
+def defeat() -> None:
     print("You have lost...")
     go_to_menu('main')

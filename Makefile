@@ -10,6 +10,10 @@ all: analysis test
 test:
 	-$(VENV) pytest $(PYTEST_ARGS)
 
+.PHONY: check
+check:
+	-$(VENV) mypy .
+
 .PHONY: analysis
 analysis:
 	$(VENV) flake8

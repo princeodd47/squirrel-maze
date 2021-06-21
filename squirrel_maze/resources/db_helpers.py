@@ -7,16 +7,16 @@ class Database:
     def __init__(self, db_file: str):
         self.db = TinyDB(db_file)
 
-    def close(self):
+    def close(self) -> None:
         self.db.close()
 
-    def get_table(self, table_name: str):
+    def get_table(self, table_name: str): # type: ignore
         return self.db.table(table_name)
 
-    def get_table_contents(self, table_name):
+    def get_table_contents(self, table_name): # type: ignore
         return self.db.table(table_name).all()
 
-    def get_next_index(self, key):
+    def get_next_index(self, key): # type: ignore
         index_contents = self.get_table_contents('next_index')
         return index_contents[0][key]
 

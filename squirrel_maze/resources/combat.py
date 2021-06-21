@@ -1,4 +1,4 @@
-from typing import List
+from typing import Dict, List
 
 from squirrel_maze.resources.actor import Actor
 from squirrel_maze.resources import actor as sm_actor
@@ -15,7 +15,7 @@ class Combat:
         self.get_initiative_order()
         # self.turn_order = self.get_initiative_order()
 
-    def battle(self):
+    def battle(self) -> None:
         while sm_helpers.any_members_alive(self.actors, 'npc') and sm_helpers.any_members_alive(self.actors, 'pc'):
             self.battle_round()
         if sm_helpers.any_members_alive(self.actors, 'pc'):
@@ -23,28 +23,28 @@ class Combat:
         else:
             sm_menus.defeat()
 
-    def battle_round(self):
+    def battle_round(self) -> None:
         for actor in self.actors:
             self.active_actor = actor
             if self.active_actor.cur_hp > 0:
                 self.battle_turn()
         self.round += 1
 
-    def battle_turn(self):
+    def battle_turn(self) -> None:
         if(self.active_actor.pc_type == 'npc'):
             self.npc_battle_turn()
         else:
             self.pc_battle_turn()
 
-    def npc_battle_turn(self):
+    def npc_battle_turn(self) -> None:
         unfriendlies = sm_helpers.get_affiliated_actors("unfriendly", self.actors)
         target_actor = unfriendlies[0]
         sm_action.fight(self.active_actor, target_actor)
 
-    def pc_battle_turn(self):
+    def pc_battle_turn(self) -> None:
         sm_menus.battle_menu(self.active_actor, self.actors)
 
-    def combat_setup(self):
+    def combat_setup(self) -> None:
         raise NotImplementedError
         actors = []
         # actors.append(sm_npc.get_goblin("Fooblin"))
@@ -54,11 +54,11 @@ class Combat:
         # print("{}({}) fights {}({})".format(actors[0].name, actors[0].pc_type, actors[1].name, actors[1].pc_type))
         Combat(actors)
 
-    def get_initiative_order(self):
+    def get_initiative_order(self) -> None:
         self.actors = sm_helpers.get_actor_list_by_stat(self.actors, 'cur_dex', 'level')
 
-    def get_teams(self):
-        self.teams = {}
+    def get_teams(self) -> None:
+        self.teams: Dict = {}
         for actor in self.actors:
             if actor.pc_type not in self.teams:
                 self.teams.update(

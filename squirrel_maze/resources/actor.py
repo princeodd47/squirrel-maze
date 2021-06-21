@@ -35,7 +35,7 @@ class Actor:
         self.restore_all_stats_to_max()
 
 
-    def _initialize_stats(self):
+    def _initialize_stats(self) -> None:
         self.max_hp = 0
         self.max_str = 0
         self.max_dex = 0
@@ -51,7 +51,7 @@ class Actor:
         self.cur_crit_hit_chance = 10
         self.cur_crit_fail_chance = 1
 
-    def set_equipment(self, equipment:dict):
+    def set_equipment(self, equipment:dict) -> None:
         self.equipment = {
             'weapon': equipment['weapon'],
             'body': equipment['body'],
@@ -60,13 +60,13 @@ class Actor:
             'accessory': equipment['accessory']
         }
 
-    def update_equipment(self, equipment:dict):
+    def update_equipment(self, equipment:dict) -> None:
         self.equipment.update(equipment)
 
-    def get_weapon(self):
-        return self.equipment['weapon']
+    # def get_weapon(self):
+    #     return self.equipment['weapon']
 
-    def set_stats(self, stats:dict):
+    def set_stats(self, stats:dict) -> None:
         if 'max_hp' in stats.keys():
             self.max_hp = stats['max_hp']
         else:
@@ -88,7 +88,7 @@ class Actor:
         else:
             self.max_wil = 10
 
-    def print_char_sheet(self):
+    def print_char_sheet(self) -> None:
         print(
             tabulate(
                 {
@@ -109,25 +109,19 @@ class Actor:
             )
         )
 
-    def modify_stat(self, stat:str, value:int):
+    def modify_stat(self, stat:str, value:int) -> None:
         self.__setattr__(stat, self.__getattribute__(stat) + value)
 
-    def set_stat(self, stat:str, value:int):
+    def set_stat(self, stat:str, value:int) -> None:
         self.__setattr__(stat, self.__getattribute__(stat))
 
-    def change_attribute(self, stat:str, value:int):
+    def change_attribute(self, stat:str, value:int) -> None:
         self.__setattr__(stat, value)
 
-    def get_sta_reduction(self):
-        raise "not implemented"
-
-    def get_crit_modifier(self):
-        raise "not implemented"
-
-    def restore_stat_to_max(self, stat:str):
+    def restore_stat_to_max(self, stat:str) -> None:
         self.__setattr__("cur_{}".format(stat), self.__getattribute__("max_{}".format(stat)))
 
-    def restore_all_stats_to_max(self):
+    def restore_all_stats_to_max(self) -> None:
         stats = helpers.get_stat_list()
         for stat in stats:
             self.restore_stat_to_max(stat)
