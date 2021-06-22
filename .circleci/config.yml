@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.7.3
+      - image: circleci/python:3.8.10
         environment:
             PIPENV_VENV_IN_PROJECT: true
     working_directory: ~/squirrel-maze

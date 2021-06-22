@@ -11,6 +11,13 @@ Installing poetry
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -
 ```
 
+Install test dependencies
+```
+poetry run python3 -m pip install types-tabulate
+poetry run mypy --install-types
+```
+
+
 ## Run unit tests
 ```
 make tests
