@@ -1,7 +1,7 @@
 name: CI
 on: [push]
 jobs:
-  check-bats-version:
+  unit-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -10,3 +10,4 @@ jobs:
           python-version: 3.7
       - uses: Gr1N/setup-poetry@v4
       - run: poetry --version
+      - run: make test
