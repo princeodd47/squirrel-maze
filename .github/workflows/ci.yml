@@ -1,0 +1,15 @@
+name: CI
+on: [push]
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - uses: Gr1N/setup-poetry@v4
+      - run: poetry --version
+      - run: poetry install
+      - run: poetry run mypy .
+      - run: poetry run pytest -vvl --junitxml=artifacts/test_results/junit.xml --cov=$squirrel_maze --cov-report term-missing --cov-report html test/

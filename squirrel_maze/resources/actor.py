@@ -1,5 +1,3 @@
-from tabulate import tabulate
-
 from squirrel_maze.resources import helpers
 
 EQUIPMENT_DEFAULTS = {
@@ -87,27 +85,6 @@ class Actor:
             self.max_wil = stats['max_wil']
         else:
             self.max_wil = 10
-
-    def print_char_sheet(self) -> None:
-        print(
-            tabulate(
-                {
-                    "name": [self.name],
-                    "level": [self.level],
-                    "hp": [str("{}/{}".format(self.cur_hp, self.max_hp))],
-                    "pc_type": [str("{}".format(self.pc_type))],
-                    "affiliation": [str("{}".format(self.affiliation))],
-                    "str": [str("{}/{}".format(self.cur_str, self.max_str))],
-                    "dex": [str("{}/{}".format(self.cur_dex, self.max_dex))],
-                    "sta": [str("{}/{}".format(self.cur_sta, self.max_sta))],
-                    "wil": [str("{}/{}".format(self.cur_wil, self.max_wil))],
-                    "crit_hit": [str("{}/{}".format(self.cur_crit_hit_chance, self.max_crit_hit_chance))],
-                    "crit_fail": [str("{}/{}".format(self.cur_crit_fail_chance, self.max_crit_fail_chance))],
-                },
-                headers="keys",
-                tablefmt="grid"
-            )
-        )
 
     def modify_stat(self, stat:str, value:int) -> None:
         self.__setattr__(stat, self.__getattribute__(stat) + value)
