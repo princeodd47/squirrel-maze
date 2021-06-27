@@ -1,4 +1,4 @@
-![CI workflow](https://github.com/princeodd47/squirrel-maze/actions/workflows/cli.yml/badge.svg)
+[![CI](https://github.com/princeodd47/squirrel-maze/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/princeodd47/squirrel-maze/actions/workflows/ci.yml)
 
 # squirrel-maze
 Goal: Using a pregenerated character, user can play through combat versus a pregenerated opponent.
