@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/princeodd47/squirrel-maze.svg?style=svg)](https://circleci.com/gh/princeodd47/squirrel-maze)
+![CI workflow](https://github.com/princeodd47/squirrel-maze/actions/workflows/cli.yml/badge.svg)
 
 # squirrel-maze
 Goal: Using a pregenerated character, user can play through combat versus a pregenerated opponent.
