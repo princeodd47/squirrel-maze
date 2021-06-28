@@ -111,9 +111,9 @@ def test_get_actor_list_by_stat():
 
     assert sorted_actors[0].name == 'baz'
 
-@pytest.mark.parametrize('affiliation, expected_count', [('friendly', 4),('unfriendly', 2)])
+
+@pytest.mark.parametrize('affiliation, expected_count', [('friendly', 4), ('unfriendly', 2)])
 def test_get_friendly_actors(affiliation, expected_count):
-    actor_ham = test_helpers.get_single_actor()
     actors = test_helpers.get_multiple_actors()
 
     affiliation_count = helpers.get_affiliated_actors(affiliation, actors)

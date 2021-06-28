@@ -18,8 +18,8 @@ STAT_DEFAULTS = {
 
 
 class Actor:
-    def __init__(self, actor_id:int=0, level:int=1, pc_type:str="npc", affiliation:str="friendly", name:str="unknown", stats:dict=STAT_DEFAULTS,
-            equipment:dict=EQUIPMENT_DEFAULTS):
+    def __init__(self, actor_id: int = 0, level: int = 1, pc_type: str = "npc", affiliation: str = "friendly",
+                 name: str = "unknown", stats: dict = STAT_DEFAULTS, equipment: dict = EQUIPMENT_DEFAULTS):
         self.actor_id = actor_id
         self.pc_type = pc_type
         self.affiliation = affiliation
@@ -31,7 +31,6 @@ class Actor:
         self._initialize_stats()
         self.set_stats(stats)
         self.restore_all_stats_to_max()
-
 
     def _initialize_stats(self) -> None:
         self.max_hp = 0
@@ -49,7 +48,7 @@ class Actor:
         self.cur_crit_hit_chance = 10
         self.cur_crit_fail_chance = 1
 
-    def set_equipment(self, equipment:dict) -> None:
+    def set_equipment(self, equipment: dict) -> None:
         self.equipment = {
             'weapon': equipment['weapon'],
             'body': equipment['body'],
@@ -58,13 +57,13 @@ class Actor:
             'accessory': equipment['accessory']
         }
 
-    def update_equipment(self, equipment:dict) -> None:
+    def update_equipment(self, equipment: dict) -> None:
         self.equipment.update(equipment)
 
     # def get_weapon(self):
     #     return self.equipment['weapon']
 
-    def set_stats(self, stats:dict) -> None:
+    def set_stats(self, stats: dict) -> None:
         if 'max_hp' in stats.keys():
             self.max_hp = stats['max_hp']
         else:
@@ -86,16 +85,16 @@ class Actor:
         else:
             self.max_wil = 10
 
-    def modify_stat(self, stat:str, value:int) -> None:
+    def modify_stat(self, stat: str, value: int) -> None:
         self.__setattr__(stat, self.__getattribute__(stat) + value)
 
-    def set_stat(self, stat:str, value:int) -> None:
+    def set_stat(self, stat: str, value: int) -> None:
         self.__setattr__(stat, self.__getattribute__(stat))
 
-    def change_attribute(self, stat:str, value:int) -> None:
+    def change_attribute(self, stat: str, value: int) -> None:
         self.__setattr__(stat, value)
 
-    def restore_stat_to_max(self, stat:str) -> None:
+    def restore_stat_to_max(self, stat: str) -> None:
         self.__setattr__("cur_{}".format(stat), self.__getattribute__("max_{}".format(stat)))
 
     def restore_all_stats_to_max(self) -> None:

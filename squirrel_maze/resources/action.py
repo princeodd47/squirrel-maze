@@ -3,7 +3,7 @@ from squirrel_maze.resources import helpers
 from squirrel_maze.resources.actor import Actor
 
 
-def fight(source:Actor, target:Actor) -> None:
+def fight(source: Actor, target: Actor) -> None:
     """Physical attack between actors. Target actor's hp is reduced by damage dealt."""
     src_atk_total = source.get_atk_value()
     tar_def_total = target.get_def_value()

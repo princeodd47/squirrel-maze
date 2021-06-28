@@ -8,15 +8,18 @@ all: analysis test
 
 .PHONY: test
 test:
-	-$(VENV) pytest $(PYTEST_ARGS)
-
-.PHONY: check
-check:
-	-$(VENV) mypy .
+	$(VENV) pytest $(PYTEST_ARGS)
 
 .PHONY: analysis
-analysis:
+analysis: flake8 mypy
+
+.PHONY: flake8
+flake8:
 	$(VENV) flake8
+
+.PHONY: mypy
+mypy:
+	$(VENV) mypy .
 
 .PHONY: clean
 clean:

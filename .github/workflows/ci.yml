@@ -11,5 +11,5 @@ jobs:
       - uses: Gr1N/setup-poetry@v4
       - run: poetry --version
       - run: poetry install
-      - run: poetry run mypy .
-      - run: poetry run pytest -vvl --junitxml=artifacts/test_results/junit.xml --cov=$squirrel_maze --cov-report term-missing --cov-report html test/
+      - run: make analysis
+      - run: make test
