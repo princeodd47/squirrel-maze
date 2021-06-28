@@ -16,9 +16,11 @@ class Combat:
         # self.turn_order = self.get_initiative_order()
 
     def battle(self) -> None:
-        while sm_helpers.any_members_alive(self.actors, 'npc') and sm_helpers.any_members_alive(self.actors, 'pc'):
+        while sm_helpers.any_members_alive(
+            self.actors, "npc"
+        ) and sm_helpers.any_members_alive(self.actors, "pc"):
             self.battle_round()
-        if sm_helpers.any_members_alive(self.actors, 'pc'):
+        if sm_helpers.any_members_alive(self.actors, "pc"):
             sm_menus.victory()
         else:
             sm_menus.defeat()
@@ -31,7 +33,7 @@ class Combat:
         self.round += 1
 
     def battle_turn(self) -> None:
-        if(self.active_actor.pc_type == 'npc'):
+        if self.active_actor.pc_type == "npc":
             self.npc_battle_turn()
         else:
             self.pc_battle_turn()
@@ -48,22 +50,26 @@ class Combat:
         raise NotImplementedError
         actors = []
         # actors.append(sm_npc.get_goblin("Fooblin"))
-        char1 = sm_actor.Actor(pc_type="pc", name="Bar", level=1, max_hp=20,
-                               max_str=10, max_dex=10, max_sta=10, max_wil=5)
+        char1 = sm_actor.Actor(
+            pc_type="pc",
+            name="Bar",
+            level=1,
+            max_hp=20,
+            max_str=10,
+            max_dex=10,
+            max_sta=10,
+            max_wil=5,
+        )
         actors.append(char1)
         # print("{}({}) fights {}({})".format(actors[0].name, actors[0].pc_type, actors[1].name, actors[1].pc_type))
         Combat(actors)
 
     def get_initiative_order(self) -> None:
-        self.actors = sm_helpers.get_actor_list_by_stat(self.actors, 'cur_dex', 'level')
+        self.actors = sm_helpers.get_actor_list_by_stat(self.actors, "cur_dex", "level")
 
     def get_teams(self) -> None:
         self.teams: Dict = {}
         for actor in self.actors:
             if actor.pc_type not in self.teams:
-                self.teams.update(
-                    {
-                        actor.pc_type: []
-                    }
-                )
+                self.teams.update({actor.pc_type: []})
             self.teams[actor.pc_type].append(actor.name)

@@ -11,7 +11,11 @@ test:
 	$(VENV) pytest $(PYTEST_ARGS)
 
 .PHONY: analysis
-analysis: flake8 mypy
+analysis: flake8 mypy black
+
+.PHONY: black
+black:
+	$(VENV) black squirrel_maze/ --check
 
 .PHONY: flake8
 flake8:
@@ -20,6 +24,10 @@ flake8:
 .PHONY: mypy
 mypy:
 	$(VENV) mypy .
+
+.PHONY: format
+format:
+	$(VENV) black squirrel_maze/
 
 .PHONY: clean
 clean:

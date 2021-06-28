@@ -30,8 +30,7 @@ def get_crit_fail_bonus() -> int:
 
 
 def get_stat_list() -> List[str]:
-    stats = ["hp", "str", "dex", "sta", "wil",
-             "crit_hit_chance", "crit_fail_chance"]
+    stats = ["hp", "str", "dex", "sta", "wil", "crit_hit_chance", "crit_fail_chance"]
     return stats
 
 
@@ -47,8 +46,14 @@ def any_members_alive(actors, pc_type: str) -> bool:  # type: ignore
 
 
 def get_actor_list_by_stat(actors, stat_primary: str, stat_secondary: str):  # type: ignore
-    sorted_actors = sorted(actors, key=lambda actor: (getattr(actor, stat_primary), getattr(actor, stat_secondary)),
-                           reverse=True)
+    sorted_actors = sorted(
+        actors,
+        key=lambda actor: (
+            getattr(actor, stat_primary),
+            getattr(actor, stat_secondary),
+        ),
+        reverse=True,
+    )
     return sorted_actors
 
 

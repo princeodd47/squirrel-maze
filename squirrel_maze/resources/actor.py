@@ -1,25 +1,27 @@
 from squirrel_maze.resources import helpers
 
-EQUIPMENT_DEFAULTS = {
-    'weapon': 0,
-    'body': 0,
-    'head': 0,
-    'arm': 0,
-    'accessory': 0
-}
+EQUIPMENT_DEFAULTS = {"weapon": 0, "body": 0, "head": 0, "arm": 0, "accessory": 0}
 
 STAT_DEFAULTS = {
-        'max_str': 10,
-        'max_dex': 10,
-        'max_sta': 10,
-        'max_wil': 10,
-        'max_hp': 10
+    "max_str": 10,
+    "max_dex": 10,
+    "max_sta": 10,
+    "max_wil": 10,
+    "max_hp": 10,
 }
 
 
 class Actor:
-    def __init__(self, actor_id: int = 0, level: int = 1, pc_type: str = "npc", affiliation: str = "friendly",
-                 name: str = "unknown", stats: dict = STAT_DEFAULTS, equipment: dict = EQUIPMENT_DEFAULTS):
+    def __init__(
+        self,
+        actor_id: int = 0,
+        level: int = 1,
+        pc_type: str = "npc",
+        affiliation: str = "friendly",
+        name: str = "unknown",
+        stats: dict = STAT_DEFAULTS,
+        equipment: dict = EQUIPMENT_DEFAULTS,
+    ):
         self.actor_id = actor_id
         self.pc_type = pc_type
         self.affiliation = affiliation
@@ -50,11 +52,11 @@ class Actor:
 
     def set_equipment(self, equipment: dict) -> None:
         self.equipment = {
-            'weapon': equipment['weapon'],
-            'body': equipment['body'],
-            'head': equipment['head'],
-            'arm': equipment['arm'],
-            'accessory': equipment['accessory']
+            "weapon": equipment["weapon"],
+            "body": equipment["body"],
+            "head": equipment["head"],
+            "arm": equipment["arm"],
+            "accessory": equipment["accessory"],
         }
 
     def update_equipment(self, equipment: dict) -> None:
@@ -64,24 +66,24 @@ class Actor:
     #     return self.equipment['weapon']
 
     def set_stats(self, stats: dict) -> None:
-        if 'max_hp' in stats.keys():
-            self.max_hp = stats['max_hp']
+        if "max_hp" in stats.keys():
+            self.max_hp = stats["max_hp"]
         else:
             self.max_hp = 10
-        if 'max_str' in stats.keys():
-            self.max_str = stats['max_str']
+        if "max_str" in stats.keys():
+            self.max_str = stats["max_str"]
         else:
             self.max_str = 10
-        if 'max_dex' in stats.keys():
-            self.max_dex = stats['max_dex']
+        if "max_dex" in stats.keys():
+            self.max_dex = stats["max_dex"]
         else:
             self.max_dex = 10
-        if 'max_sta' in stats.keys():
-            self.max_sta = stats['max_sta']
+        if "max_sta" in stats.keys():
+            self.max_sta = stats["max_sta"]
         else:
             self.max_sta = 10
-        if 'max_wil' in stats.keys():
-            self.max_wil = stats['max_wil']
+        if "max_wil" in stats.keys():
+            self.max_wil = stats["max_wil"]
         else:
             self.max_wil = 10
 
@@ -95,7 +97,9 @@ class Actor:
         self.__setattr__(stat, value)
 
     def restore_stat_to_max(self, stat: str) -> None:
-        self.__setattr__("cur_{}".format(stat), self.__getattribute__("max_{}".format(stat)))
+        self.__setattr__(
+            "cur_{}".format(stat), self.__getattribute__("max_{}".format(stat))
+        )
 
     def restore_all_stats_to_max(self) -> None:
         stats = helpers.get_stat_list()
@@ -122,4 +126,4 @@ class Actor:
         return def_total
 
     def get_weapon_bonus(self) -> int:
-        return self.equipment['weapon']
+        return self.equipment["weapon"]

@@ -12,9 +12,16 @@ def fight(source: Actor, target: Actor) -> None:
     if dmg < 1:
         dmg = 1
 
-    print("{} {} (hp: {}) attacks {} {} (hp: {}) for {} dmg.".format(
-        source.actor_id, source.name, source.cur_hp,
-        target.actor_id, target.name, target.cur_hp, dmg)
+    print(
+        "{} {} (hp: {}) attacks {} {} (hp: {}) for {} dmg.".format(
+            source.actor_id,
+            source.name,
+            source.cur_hp,
+            target.actor_id,
+            target.name,
+            target.cur_hp,
+            dmg,
+        )
     )
 
     target.cur_hp -= dmg
@@ -27,22 +34,18 @@ def fight_all(source: Actor, targets: List[Actor]) -> None:
 
 
 def fire_bolt(source: Actor, target: Actor) -> List:
-    dmg_val = helpers.get_rand_val(1, 2) + source.level + (source.cur_wil - target.cur_wil)
-    dmg = []
-    dmg.append(
-        {"element": "fire", "damage": dmg_val}
+    dmg_val = (
+        helpers.get_rand_val(1, 2) + source.level + (source.cur_wil - target.cur_wil)
     )
+    dmg = []
+    dmg.append({"element": "fire", "damage": dmg_val})
     return dmg
 
 
 def fire_punch(source: Actor, target: Actor) -> List:
     dmg = []
-    dmg.append(
-        {"element": "fire", "damage": helpers.get_rand_val(1, 2) + source.level}
-    )
-    dmg.append(
-        {"element": "none", "damage": helpers.get_rand_val(1, 10)}
-    )
+    dmg.append({"element": "fire", "damage": helpers.get_rand_val(1, 2) + source.level})
+    dmg.append({"element": "none", "damage": helpers.get_rand_val(1, 10)})
     return dmg
 
 
