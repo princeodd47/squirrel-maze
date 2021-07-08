@@ -1,4 +1,5 @@
 [![CI](https://github.com/princeodd47/squirrel-maze/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/princeodd47/squirrel-maze/actions/workflows/ci.yml)
+[![Code style: black](https://img.shields/io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 # squirrel-maze
 Goal: Using a pregenerated character, user can play through combat versus a pregenerated opponent.

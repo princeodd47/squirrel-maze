@@ -6,10 +6,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v1
+      - uses: codecov/codecov-action@v1
         with:
           python-version: 3.8
       - uses: Gr1N/setup-poetry@v4
       - run: poetry --version
       - run: poetry install
       - run: make analysis
+      - run: make coverage
       - run: make test
