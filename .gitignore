@@ -9,9 +9,6 @@ artifacts
 .coverage
 htmlcov
 
-#codecov files
-codecov.yml
-
 # swap files
 *.swp
 

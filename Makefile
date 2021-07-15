@@ -1,6 +1,6 @@
 PACKAGE_NAME = squirrel_maze
 PYTEST_COV = --cov=$(PACKAGE_NAME) --cov-report term-missing --cov-report html test/
-PYTEST_ARGS = -vvl --junitxml=artifacts/test_results/junit.xml
+PYTEST_ARGS = -vvl --junitxml=artifacts/test_results/junit.xml $(PYTEST_COV)
 VENV = poetry run
 
 .PHONY: all
@@ -28,10 +28,6 @@ mypy:
 .PHONY: format
 format:
 	$(VENV) black squirrel_maze/
-
-.PHONY: coverage
-coverage:
-	$(VENV) coverage report
 
 .PHONY: clean
 clean:
